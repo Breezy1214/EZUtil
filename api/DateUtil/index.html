@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="plugin-moonwave plugin-id-moonwave" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">DateUtil | EZUtil</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://Breezy1214.github.io/EZUtil/api/DateUtil"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="DateUtil | EZUtil"><meta data-rh="true" name="description" content="Helpers for unix timestamps, fixed-length periods (such as daily or weekly
+resets) and human-readable durations. All timestamps are in seconds."><meta data-rh="true" property="og:description" content="Helpers for unix timestamps, fixed-length periods (such as daily or weekly
+resets) and human-readable durations. All timestamps are in seconds."><link data-rh="true" rel="canonical" href="https://Breezy1214.github.io/EZUtil/api/DateUtil"><link data-rh="true" rel="alternate" href="https://Breezy1214.github.io/EZUtil/api/DateUtil" hreflang="en"><link data-rh="true" rel="alternate" href="https://Breezy1214.github.io/EZUtil/api/DateUtil" hreflang="x-default"><link rel="stylesheet" href="/EZUtil/assets/css/styles.b9f2c64d.css">
+<script src="/EZUtil/assets/js/runtime~main.fd89ad75.js" defer="defer"></script>
+<script src="/EZUtil/assets/js/main.4106c634.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/EZUtil/"><b class="navbar__title text--truncate">EZUtil</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/EZUtil/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/Breezy1214/EZUtil" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/EZUtil">​E​Z​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/AimIndicator">​Aim​Indicator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/CharacterRigUtil">​Character​Rig​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/EZUtil/api/DateUtil">​Date​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/FixedRewardSequence">​Fixed​Reward​Sequence</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/GroundUtil">​Ground​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/InstanceUtil">​Instance​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/JanitorUtil">​Janitor​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/LayoutUtil">​Layout​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/MathUtil">​Math​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/ParticleUtil">​Particle​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/PlayerUtil">​Player​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/ProfileUtil">​Profile​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/ProjectileUtil">​Projectile​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/SearchUtil">​Search​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/SystemUtil">​System​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/TableDiffUtil">​Table​Diff​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/TableUtil">​Table​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/VfxUtil">​Vfx​Util</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">Date</span><span style="display:inline-block">Util</span></h1><div class="luaClassTags_EipM"></div><div>
+<p>
+  Helpers for unix timestamps, fixed-length periods (such as daily or weekly
+  resets) and human-readable durations. All timestamps are in seconds.
+</p>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="types">Types<a href="#types" class="hash-link" aria-label="Direct link to Types" title="Direct link to Types">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="DateTimeComponents"><code style="text-decoration:none">DateTimeComponents</code><a href="#DateTimeComponents" class="hash-link" aria-label="Direct link to DateTimeComponents" title="Direct link to DateTimeComponents">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L24"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>DateTimeComponents<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>Year<!-- -->: </code><code class="blue_P4bS">number</code></div><div><code>Month<!-- -->: </code><code class="blue_P4bS">number</code></div><div><code>Day<!-- -->: </code><code class="blue_P4bS">number</code></div><div><code>Hour<!-- -->: </code><code class="blue_P4bS">number</code></div><div><code>Minute<!-- -->: </code><code class="blue_P4bS">number</code></div><div><code>Second<!-- -->: </code><code class="blue_P4bS">number</code></div><div><code>Millisecond<!-- -->: </code><code class="blue_P4bS">number</code></div></div><code>}</code></div><div>
+<p>UTC date and time components, as accepted by <code>DateTime.fromUniversalTime</code>.</p>
+</div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="properties">Properties<a href="#properties" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SECONDS_PER_DAY"><code style="text-decoration:none">SECONDS_PER_DAY</code><a href="#SECONDS_PER_DAY" class="hash-link" aria-label="Direct link to SECONDS_PER_DAY" title="Direct link to SECONDS_PER_DAY">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L46"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.<!-- -->SECONDS_PER_DAY<!-- -->:<!-- --> </code> <code class="blue_P4bS">number</code></div><div>
+<p>The number of seconds in a day (86400).</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SECONDS_PER_WEEK"><code style="text-decoration:none">SECONDS_PER_WEEK</code><a href="#SECONDS_PER_WEEK" class="hash-link" aria-label="Direct link to SECONDS_PER_WEEK" title="Direct link to SECONDS_PER_WEEK">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L53"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.<!-- -->SECONDS_PER_WEEK<!-- -->:<!-- --> </code> <code class="blue_P4bS">number</code></div><div>
+<p>The number of seconds in a week (604800).</p>
+</div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="dateTimeComponentsToTimestamp"><code style="text-decoration:none">dateTimeComponentsToTimestamp</code><a href="#dateTimeComponentsToTimestamp" class="hash-link" aria-label="Direct link to dateTimeComponentsToTimestamp" title="Direct link to dateTimeComponentsToTimestamp">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L79"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.</code><code class="green_DgR4">dateTimeComponentsToTimestamp</code><code>(</code><code>components<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/EZUtil/api/DateUtil#DateTimeComponents">DateTimeComponents</a></code><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>
+  Converts UTC date and time components to a unix timestamp in seconds. The
+  milliseconds are kept as a fraction.
+</p>
+<pre class="language-lua"><code class="language-lua">DateUtil<span class="token punctuation">.</span><span class="token function">dateTimeComponentsToTimestamp</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+	Year <span class="token operator">=</span> <span class="token number">2024</span><span class="token punctuation">,</span> Month <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> Day <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>
+	Hour <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> Minute <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> Second <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> Millisecond <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- 1704067200</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="unix"><code style="text-decoration:none">unix</code><a href="#unix" class="hash-link" aria-label="Direct link to unix" title="Direct link to unix">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L107"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.</code><code class="green_DgR4">unix</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>
+  Get the current unix timestamp in UTC time.
+  This is the number of <strong>seconds</strong> since January 1, 1970.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getPeriod"><code style="text-decoration:none">getPeriod</code><a href="#getPeriod" class="hash-link" aria-label="Direct link to getPeriod" title="Direct link to getPeriod">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L129"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.</code><code class="green_DgR4">getPeriod</code><code>(</code><div class="inset_uKQm"><div><code>timestamp<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>duration<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The period length in seconds. Must be greater than zero.</p>
+</span></span></div><div><code>offset<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Shifts where periods start, in seconds. Defaults to 0.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>
+  Returns the index of the fixed-length period that contains <code>timestamp</code>, counting
+  from the unix epoch shifted by <code>offset</code>. Useful for daily or weekly resets: two
+  timestamps are in the same period when this returns the same number.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> today <span class="token operator">=</span> DateUtil<span class="token punctuation">.</span><span class="token function">getPeriod</span><span class="token punctuation">(</span>DateUtil<span class="token punctuation">.</span><span class="token function">unix</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> DateUtil<span class="token punctuation">.</span>SECONDS_PER_DAY<span class="token punctuation">)</span>
+
+<span class="token comment">-- Days that reset at 12:00 UTC instead of midnight</span>
+<span class="token keyword">local</span> shiftedDay <span class="token operator">=</span> DateUtil<span class="token punctuation">.</span><span class="token function">getPeriod</span><span class="token punctuation">(</span>DateUtil<span class="token punctuation">.</span><span class="token function">unix</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> DateUtil<span class="token punctuation">.</span>SECONDS_PER_DAY<span class="token punctuation">,</span> <span class="token number">12</span> <span class="token operator">*</span> <span class="token number">3600</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getPeriodEnd"><code style="text-decoration:none">getPeriodEnd</code><a href="#getPeriodEnd" class="hash-link" aria-label="Direct link to getPeriodEnd" title="Direct link to getPeriodEnd">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L149"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.</code><code class="green_DgR4">getPeriodEnd</code><code>(</code><div class="inset_uKQm"><div><code>period<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>A period index from <a href="/EZUtil/api/DateUtil#getPeriod">DateUtil.getPeriod</a>.</p>
+</span></span></div><div><code>duration<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The period length in seconds. Must be greater than zero.</p>
+</span></span></div><div><code>offset<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Defaults to 0.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>
+  Returns the timestamp at which <code>period</code> ends (and the next one starts). Use the
+  same <code>duration</code> and <code>offset</code> that were passed to <a href="/EZUtil/api/DateUtil#getPeriod">DateUtil.getPeriod</a>.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> today <span class="token operator">=</span> DateUtil<span class="token punctuation">.</span><span class="token function">getPeriod</span><span class="token punctuation">(</span>DateUtil<span class="token punctuation">.</span><span class="token function">unix</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> DateUtil<span class="token punctuation">.</span>SECONDS_PER_DAY<span class="token punctuation">)</span>
+<span class="token keyword">local</span> secondsUntilReset <span class="token operator">=</span> DateUtil<span class="token punctuation">.</span><span class="token function">getPeriodEnd</span><span class="token punctuation">(</span>today<span class="token punctuation">,</span> DateUtil<span class="token punctuation">.</span>SECONDS_PER_DAY<span class="token punctuation">)</span> <span class="token operator">-</span> DateUtil<span class="token punctuation">.</span><span class="token function">unix</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="formatDuration"><code style="text-decoration:none">formatDuration</code><a href="#formatDuration" class="hash-link" aria-label="Direct link to formatDuration" title="Direct link to formatDuration">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L167"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.</code><code class="green_DgR4">formatDuration</code><code>(</code><code>seconds<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
+<p>
+  Formats a duration as hours, minutes and seconds. Negative durations are treated
+  as 0 and fractions of a second are dropped.
+</p>
+<pre class="language-lua"><code class="language-lua">DateUtil<span class="token punctuation">.</span><span class="token function">formatDuration</span><span class="token punctuation">(</span><span class="token number">3725</span><span class="token punctuation">)</span> <span class="token comment">-- "1h 2m 5s"</span>
+DateUtil<span class="token punctuation">.</span><span class="token function">formatDuration</span><span class="token punctuation">(</span><span class="token number">59</span><span class="token punctuation">)</span> <span class="token comment">-- "0h 0m 59s"</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="timeAgoUnix"><code style="text-decoration:none">timeAgoUnix</code><a href="#timeAgoUnix" class="hash-link" aria-label="Direct link to timeAgoUnix" title="Direct link to timeAgoUnix">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L186"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.</code><code class="green_DgR4">timeAgoUnix</code><code>(</code><div class="inset_uKQm"><div><code>timestamp<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>endTimestamp<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The timestamp to compare to. Defaults to the current time.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>Returns the number of seconds between <code>timestamp</code> and <code>endTimestamp</code>.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="formatUnix"><code style="text-decoration:none">formatUnix</code><a href="#formatUnix" class="hash-link" aria-label="Direct link to formatUnix" title="Direct link to formatUnix">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L212"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.</code><code class="green_DgR4">formatUnix</code><code>(</code><div class="inset_uKQm"><div><code>timestamp<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>Rounded down to a whole second.</p>
+</span></span></div><div><code>format<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The DateTime format string to use.</p>
+</span></span></div><div><code>locale<!-- -->: </code><code class="blue_P4bS">string?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The locale to use. Defaults to <code>en-us</code>.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">string</code><span class="inlineDescription_G7Er">-- <span>
+<p>The formatted time in local time.</p>
+</span></span></div><div>
+<p>
+  Formats a unix timestamp in local time with a
+  <a href="https://create.roblox.com/docs/reference/engine/datatypes/DateTime">DateTime</a>
+  format string.
+</p>
+<h4>Example</h4>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> secondsLeft<span class="token punctuation">:</span> number <span class="token operator">=</span> <span class="token number">80</span>
+
+DateUtil<span class="token punctuation">.</span><span class="token function">formatUnix</span><span class="token punctuation">(</span>secondsLeft<span class="token punctuation">,</span> <span class="token string">"mm:ss"</span><span class="token punctuation">)</span> <span class="token comment">-- 01:20</span>
+DateUtil<span class="token punctuation">.</span><span class="token function">formatUnix</span><span class="token punctuation">(</span>DateUtil<span class="token punctuation">.</span><span class="token function">unix</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"YYYY-MM-DD"</span><span class="token punctuation">)</span> <span class="token comment">-- today's date</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="unixToClockFormat"><code style="text-decoration:none">unixToClockFormat</code><a href="#unixToClockFormat" class="hash-link" aria-label="Direct link to unixToClockFormat" title="Direct link to unixToClockFormat">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L239"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.</code><code class="green_DgR4">unixToClockFormat</code><code>(</code><div class="inset_uKQm"><div><code>timestamp<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>format<!-- -->: </code><code class="blue_P4bS">string?</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The format to use. Defaults to <code>mm:ss</code>.</p>
+</span></span></div><div><code>locale<!-- -->: </code><code class="blue_P4bS">string?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The locale to use. Defaults to <code>en-us</code>.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">string</code><span class="inlineDescription_G7Er">-- <span>
+<p>The formatted time in local time.</p>
+</span></span></div><div>
+<p>
+  Formats a timestamp or a number of seconds as a clock, <code>mm:ss</code> by default
+  (e.g. 01:20). See <a href="/EZUtil/api/DateUtil#formatUnix">DateUtil.formatUnix</a>.
+</p>
+<h4>Example</h4>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> secondsLeft<span class="token punctuation">:</span> number <span class="token operator">=</span> <span class="token number">80</span>
+
+DateUtil<span class="token punctuation">.</span><span class="token function">unixToClockFormat</span><span class="token punctuation">(</span>secondsLeft<span class="token punctuation">)</span> <span class="token comment">-- 01:20</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="timeAgo"><code style="text-decoration:none">timeAgo</code><a href="#timeAgo" class="hash-link" aria-label="Direct link to timeAgo" title="Direct link to timeAgo">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L261"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.</code><code class="green_DgR4">timeAgo</code><code>(</code><div class="inset_uKQm"><div><code>timestamp<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>endTimestamp<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The timestamp to compare to. Defaults to the current time.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">string</code></div><div>
+<p>
+  Describes how long ago <code>timestamp</code> was, listing every non-zero unit from years
+  down to seconds. Returns <code>"now"</code> for less than a second.
+</p>
+<p>Months and years are averages (30.44 and 365.24 days).</p>
+<h4>Example</h4>
+<pre class="language-lua"><code class="language-lua">DateUtil<span class="token punctuation">.</span><span class="token function">timeAgo</span><span class="token punctuation">(</span>DateUtil<span class="token punctuation">.</span><span class="token function">unix</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">80</span><span class="token punctuation">)</span> <span class="token comment">-- "1 minute 20 seconds ago"</span>
+DateUtil<span class="token punctuation">.</span><span class="token function">timeAgo</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">)</span> <span class="token comment">-- "1 minute ago"</span>
+DateUtil<span class="token punctuation">.</span><span class="token function">timeAgo</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token comment">-- "now"</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="totalTime"><code style="text-decoration:none">totalTime</code><a href="#totalTime" class="hash-link" aria-label="Direct link to totalTime" title="Direct link to totalTime">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/DateUtil.luau#L317"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>DateUtil<!-- -->.</code><code class="green_DgR4">totalTime</code><code>(</code><div class="inset_uKQm"><div><code>timestamp<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>endTimestamp<!-- -->: </code><code class="blue_P4bS">number?</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The timestamp to compare to. Defaults to the current time.</p>
+</span></span></div><div><code>separator<!-- -->: </code><code class="blue_P4bS">string?</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The separator to use between each unit. Defaults to a space.</p>
+</span></span></div><div><code>depth<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The maximum number of units to return.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">string</code></div><div>
+<p>
+  Like <a href="/EZUtil/api/DateUtil#timeAgo">DateUtil.timeAgo</a>, but without the "ago" suffix, with a custom separator
+  and an optional limit on how many units are listed. Returns <code>"now"</code> for less than
+  a second.
+</p>
+<h4>Example</h4>
+<pre class="language-lua"><code class="language-lua">DateUtil<span class="token punctuation">.</span><span class="token function">totalTime</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3725</span><span class="token punctuation">)</span> <span class="token comment">-- "1 hour 2 minutes 5 seconds"</span>
+DateUtil<span class="token punctuation">.</span><span class="token function">totalTime</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3725</span><span class="token punctuation">,</span> <span class="token string">", "</span><span class="token punctuation">)</span> <span class="token comment">-- "1 hour, 2 minutes, 5 seconds"</span>
+DateUtil<span class="token punctuation">.</span><span class="token function">totalTime</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3725</span><span class="token punctuation">,</span> <span class="token string">" "</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">-- "1 hour 2 minutes"</span>
+</code></pre>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;dateTimeComponentsToTimestamp&quot;,
+            &quot;desc&quot;: &quot;Converts UTC date and time components to a unix timestamp in seconds. The\nmilliseconds are kept as a fraction.\n\n```lua\nDateUtil.dateTimeComponentsToTimestamp({\n\tYear = 2024, Month = 1, Day = 1,\n\tHour = 0, Minute = 0, Second = 0, Millisecond = 0,\n}) -- 1704067200\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;components&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;DateTimeComponents&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 79,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;unix&quot;,
+            &quot;desc&quot;: &quot;Get the current unix timestamp in UTC time.\nThis is the number of **seconds** since January 1, 1970.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 107,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getPeriod&quot;,
+            &quot;desc&quot;: &quot;Returns the index of the fixed-length period that contains `timestamp`, counting\nfrom the unix epoch shifted by `offset`. Useful for daily or weekly resets: two\ntimestamps are in the same period when this returns the same number.\n\n```lua\nlocal today = DateUtil.getPeriod(DateUtil.unix(), DateUtil.SECONDS_PER_DAY)\n\n-- Days that reset at 12:00 UTC instead of midnight\nlocal shiftedDay = DateUtil.getPeriod(DateUtil.unix(), DateUtil.SECONDS_PER_DAY, 12 * 3600)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;timestamp&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;duration&quot;,
+                    &quot;desc&quot;: &quot;The period length in seconds. Must be greater than zero.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;offset&quot;,
+                    &quot;desc&quot;: &quot;Shifts where periods start, in seconds. Defaults to 0.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 129,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getPeriodEnd&quot;,
+            &quot;desc&quot;: &quot;Returns the timestamp at which `period` ends (and the next one starts). Use the\nsame `duration` and `offset` that were passed to [DateUtil.getPeriod].\n\n```lua\nlocal today = DateUtil.getPeriod(DateUtil.unix(), DateUtil.SECONDS_PER_DAY)\nlocal secondsUntilReset = DateUtil.getPeriodEnd(today, DateUtil.SECONDS_PER_DAY) - DateUtil.unix()\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;period&quot;,
+                    &quot;desc&quot;: &quot;A period index from [DateUtil.getPeriod].&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;duration&quot;,
+                    &quot;desc&quot;: &quot;The period length in seconds. Must be greater than zero.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;offset&quot;,
+                    &quot;desc&quot;: &quot;Defaults to 0.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 149,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;formatDuration&quot;,
+            &quot;desc&quot;: &quot;Formats a duration as hours, minutes and seconds. Negative durations are treated\nas 0 and fractions of a second are dropped.\n\n```lua\nDateUtil.formatDuration(3725) -- \&quot;1h 2m 5s\&quot;\nDateUtil.formatDuration(59) -- \&quot;0h 0m 59s\&quot;\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;seconds&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 167,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;timeAgoUnix&quot;,
+            &quot;desc&quot;: &quot;Returns the number of seconds between `timestamp` and `endTimestamp`.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;timestamp&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;endTimestamp&quot;,
+                    &quot;desc&quot;: &quot;The timestamp to compare to. Defaults to the current time.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 186,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;formatUnix&quot;,
+            &quot;desc&quot;: &quot;Formats a unix timestamp in local time with a\n[DateTime](https://create.roblox.com/docs/reference/engine/datatypes/DateTime)\nformat string.\n\n#### Example\n```lua\nlocal secondsLeft: number = 80\n\nDateUtil.formatUnix(secondsLeft, \&quot;mm:ss\&quot;) -- 01:20\nDateUtil.formatUnix(DateUtil.unix(), \&quot;YYYY-MM-DD\&quot;) -- today&#x27;s date\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;timestamp&quot;,
+                    &quot;desc&quot;: &quot;Rounded down to a whole second.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;format&quot;,
+                    &quot;desc&quot;: &quot;The DateTime format string to use.&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;locale&quot;,
+                    &quot;desc&quot;: &quot;The locale to use. Defaults to `en-us`.&quot;,
+                    &quot;lua_type&quot;: &quot;string?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;The formatted time in local time.&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 212,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;unixToClockFormat&quot;,
+            &quot;desc&quot;: &quot;Formats a timestamp or a number of seconds as a clock, `mm:ss` by default\n(e.g. 01:20). See [DateUtil.formatUnix].\n\n#### Example\n```lua\nlocal secondsLeft: number = 80\n\nDateUtil.unixToClockFormat(secondsLeft) -- 01:20\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;timestamp&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;format&quot;,
+                    &quot;desc&quot;: &quot;The format to use. Defaults to `mm:ss`.&quot;,
+                    &quot;lua_type&quot;: &quot;string?&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;locale&quot;,
+                    &quot;desc&quot;: &quot;The locale to use. Defaults to `en-us`.&quot;,
+                    &quot;lua_type&quot;: &quot;string?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;The formatted time in local time.&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 239,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;timeAgo&quot;,
+            &quot;desc&quot;: &quot;Describes how long ago `timestamp` was, listing every non-zero unit from years\ndown to seconds. Returns `\&quot;now\&quot;` for less than a second.\n\nMonths and years are averages (30.44 and 365.24 days).\n\n#### Example\n```lua\nDateUtil.timeAgo(DateUtil.unix() - 80) -- \&quot;1 minute 20 seconds ago\&quot;\nDateUtil.timeAgo(100, 160) -- \&quot;1 minute ago\&quot;\nDateUtil.timeAgo(100, 100) -- \&quot;now\&quot;\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;timestamp&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;endTimestamp&quot;,
+                    &quot;desc&quot;: &quot;The timestamp to compare to. Defaults to the current time.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 261,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;totalTime&quot;,
+            &quot;desc&quot;: &quot;Like [DateUtil.timeAgo], but without the \&quot;ago\&quot; suffix, with a custom separator\nand an optional limit on how many units are listed. Returns `\&quot;now\&quot;` for less than\na second.\n\n#### Example\n```lua\nDateUtil.totalTime(0, 3725) -- \&quot;1 hour 2 minutes 5 seconds\&quot;\nDateUtil.totalTime(0, 3725, \&quot;, \&quot;) -- \&quot;1 hour, 2 minutes, 5 seconds\&quot;\nDateUtil.totalTime(0, 3725, \&quot; \&quot;, 2) -- \&quot;1 hour 2 minutes\&quot;\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;timestamp&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;endTimestamp&quot;,
+                    &quot;desc&quot;: &quot;The timestamp to compare to. Defaults to the current time.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;separator&quot;,
+                    &quot;desc&quot;: &quot;The separator to use between each unit. Defaults to a space.&quot;,
+                    &quot;lua_type&quot;: &quot;string?&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;depth&quot;,
+                    &quot;desc&quot;: &quot;The maximum number of units to return.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 317,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [
+        {
+            &quot;name&quot;: &quot;SECONDS_PER_DAY&quot;,
+            &quot;desc&quot;: &quot;The number of seconds in a day (86400).&quot;,
+            &quot;lua_type&quot;: &quot;number&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 46,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;SECONDS_PER_WEEK&quot;,
+            &quot;desc&quot;: &quot;The number of seconds in a week (604800).&quot;,
+            &quot;lua_type&quot;: &quot;number&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 53,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        }
+    ],
+    &quot;types&quot;: [
+        {
+            &quot;name&quot;: &quot;DateTimeComponents&quot;,
+            &quot;desc&quot;: &quot;UTC date and time components, as accepted by `DateTime.fromUniversalTime`.&quot;,
+            &quot;fields&quot;: [
+                {
+                    &quot;name&quot;: &quot;Year&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;Month&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;Day&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;Hour&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;Minute&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;Second&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;Millisecond&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;
+                }
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 24,
+                &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+            }
+        }
+    ],
+    &quot;name&quot;: &quot;DateUtil&quot;,
+    &quot;desc&quot;: &quot;Helpers for unix timestamps, fixed-length periods (such as daily or weekly\nresets) and human-readable durations. All timestamps are in seconds.&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 8,
+        &quot;path&quot;: &quot;src/DateUtil.luau&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a><ul><li><a href="#DateTimeComponents" class="table-of-contents__link toc-highlight">DateTimeComponents</a></li></ul></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#SECONDS_PER_DAY" class="table-of-contents__link toc-highlight">SECONDS_PER_DAY</a></li><li><a href="#SECONDS_PER_WEEK" class="table-of-contents__link toc-highlight">SECONDS_PER_WEEK</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#dateTimeComponentsToTimestamp" class="table-of-contents__link toc-highlight">.dateTimeComponentsToTimestamp</a></li><li><a href="#formatDuration" class="table-of-contents__link toc-highlight">.formatDuration</a></li><li><a href="#formatUnix" class="table-of-contents__link toc-highlight">.formatUnix</a></li><li><a href="#getPeriod" class="table-of-contents__link toc-highlight">.getPeriod</a></li><li><a href="#getPeriodEnd" class="table-of-contents__link toc-highlight">.getPeriodEnd</a></li><li><a href="#timeAgo" class="table-of-contents__link toc-highlight">.timeAgo</a></li><li><a href="#timeAgoUnix" class="table-of-contents__link toc-highlight">.timeAgoUnix</a></li><li><a href="#totalTime" class="table-of-contents__link toc-highlight">.totalTime</a></li><li><a href="#unix" class="table-of-contents__link toc-highlight">.unix</a></li><li><a href="#unixToClockFormat" class="table-of-contents__link toc-highlight">.unixToClockFormat</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Breezy1214. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

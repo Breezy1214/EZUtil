@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="mdx-wrapper mdx-page plugin-pages plugin-id-default" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">EZUtil | EZUtil</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://Breezy1214.github.io/EZUtil/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="EZUtil | EZUtil"><meta data-rh="true" name="description" content="Documentation"><meta data-rh="true" property="og:description" content="Documentation"><link data-rh="true" rel="canonical" href="https://Breezy1214.github.io/EZUtil/"><link data-rh="true" rel="alternate" href="https://Breezy1214.github.io/EZUtil/" hreflang="en"><link data-rh="true" rel="alternate" href="https://Breezy1214.github.io/EZUtil/" hreflang="x-default"><script data-rh="true">function insertBanner(){var n=document.createElement("div");n.id="__docusaurus-base-url-issue-banner-container";n.innerHTML='\n<div id="__docusaurus-base-url-issue-banner" style="border: thick solid red; background-color: rgb(255, 230, 179); margin: 20px; padding: 20px; font-size: 20px;">\n   <p style="font-weight: bold; font-size: 30px;">Your Docusaurus site did not load properly.</p>\n   <p>A very common reason is a wrong site <a href="https://docusaurus.io/docs/docusaurus.config.js/#baseUrl" style="font-weight: bold;">baseUrl configuration</a>.</p>\n   <p>Current configured baseUrl = <span style="font-weight: bold; color: red;">/EZUtil/</span> </p>\n   <p>We suggest trying baseUrl = <span id="__docusaurus-base-url-issue-banner-suggestion-container" style="font-weight: bold; color: green;"></span></p>\n</div>\n',document.body.prepend(n);var e=document.getElementById("__docusaurus-base-url-issue-banner-suggestion-container"),s=window.location.pathname,o="/"===s.substr(-1)?s:s+"/";e.innerHTML=o}document.addEventListener("DOMContentLoaded",(function(){void 0===window.docusaurus&&insertBanner()}))</script><link rel="stylesheet" href="/EZUtil/assets/css/styles.b9f2c64d.css">
+<script src="/EZUtil/assets/js/runtime~main.fd89ad75.js" defer="defer"></script>
+<script src="/EZUtil/assets/js/main.4106c634.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/EZUtil/"><b class="navbar__title text--truncate">EZUtil</b></a><a class="navbar__item navbar__link" href="/EZUtil/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/Breezy1214/EZUtil" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><main class="container container--fluid margin-vert--lg"><div class="row mdxPageWrapper_j9I6"><div class="col col--8"><article><header><h1>EZUtil</h1></header>
+<p><a href="https://breezy1214.github.io/EZUtil/" target="_blank" rel="noopener noreferrer">Documentation</a></p>
+<p>EZUtil is a collection of small, game-agnostic Roblox utilities: tables, math, dates, instances, players, UI layout, projectiles, particles and VFX. It has no game config, Knit services or hardcoded game paths, so you can drop it into any project.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="installation">Installation<a href="#installation" class="hash-link" aria-label="Direct link to Installation" title="Direct link to Installation">​</a></h2>
+<p>Add the package to your <a href="https://wally.run" target="_blank" rel="noopener noreferrer">Wally</a> manifest:</p>
+<div class="language-toml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-toml codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token punctuation" style="color:rgb(199, 146, 234)">[</span><span class="token table class-name" style="color:rgb(255, 203, 107)">dependencies</span><span class="token punctuation" style="color:rgb(199, 146, 234)">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"></span><span class="token key property">EZUtil</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(199, 146, 234)">=</span><span class="token plain"> </span><span class="token string" style="color:rgb(195, 232, 141)">&quot;breezy1214/ezutil@0.1.0&quot;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>EZUtil depends on <a href="https://github.com/howmanysmall/Janitor" target="_blank" rel="noopener noreferrer">Janitor</a> and <a href="https://github.com/evaera/roblox-lua-promise" target="_blank" rel="noopener noreferrer">Promise</a>; Wally installs both for you.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="usage">Usage<a href="#usage" class="hash-link" aria-label="Direct link to Usage" title="Direct link to Usage">​</a></h2>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token keyword" style="font-style:italic">local</span><span class="token plain"> EZUtil </span><span class="token operator" style="color:rgb(137, 221, 255)">=</span><span class="token plain"> </span><span class="token function" style="color:rgb(130, 170, 255)">require</span><span class="token punctuation" style="color:rgb(199, 146, 234)">(</span><span class="token plain">ReplicatedStorage</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token plain">Packages</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token plain">EZUtil</span><span class="token punctuation" style="color:rgb(199, 146, 234)">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"></span><span class="token function" style="color:rgb(130, 170, 255)">print</span><span class="token punctuation" style="color:rgb(199, 146, 234)">(</span><span class="token plain">EZUtil</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token plain">MathUtil</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token function" style="color:rgb(130, 170, 255)">shortenNumber</span><span class="token punctuation" style="color:rgb(199, 146, 234)">(</span><span class="token number" style="color:rgb(247, 140, 108)">1200</span><span class="token punctuation" style="color:rgb(199, 146, 234)">)</span><span class="token punctuation" style="color:rgb(199, 146, 234)">)</span><span class="token plain"> </span><span class="token comment" style="color:rgb(105, 112, 152);font-style:italic">-- 1.2K</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"></span><span class="token function" style="color:rgb(130, 170, 255)">print</span><span class="token punctuation" style="color:rgb(199, 146, 234)">(</span><span class="token plain">EZUtil</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token plain">DateUtil</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token function" style="color:rgb(130, 170, 255)">formatDuration</span><span class="token punctuation" style="color:rgb(199, 146, 234)">(</span><span class="token number" style="color:rgb(247, 140, 108)">3725</span><span class="token punctuation" style="color:rgb(199, 146, 234)">)</span><span class="token punctuation" style="color:rgb(199, 146, 234)">)</span><span class="token plain"> </span><span class="token comment" style="color:rgb(105, 112, 152);font-style:italic">-- 1h 2m 5s</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"></span><span class="token comment" style="color:rgb(105, 112, 152);font-style:italic">-- Or require a single module directly</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"></span><span class="token keyword" style="font-style:italic">local</span><span class="token plain"> TableUtil </span><span class="token operator" style="color:rgb(137, 221, 255)">=</span><span class="token plain"> </span><span class="token function" style="color:rgb(130, 170, 255)">require</span><span class="token punctuation" style="color:rgb(199, 146, 234)">(</span><span class="token plain">ReplicatedStorage</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token plain">Packages</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token plain">EZUtil</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token plain">TableUtil</span><span class="token punctuation" style="color:rgb(199, 146, 234)">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Each module is required lazily, the first time its field is read, so a client-only module never runs on the server (and the reverse). The package root is fully typed, so <code>EZUtil.</code> autocompletes every module and its functions.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="modules">Modules<a href="#modules" class="hash-link" aria-label="Direct link to Modules" title="Direct link to Modules">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="aimindicator">AimIndicator<a href="#aimindicator" class="hash-link" aria-label="Direct link to AimIndicator" title="Direct link to AimIndicator">​</a></h3>
+<p>A single neon disc that marks where an ability will land.</p>
+<ul>
+<li><code>create(size, color?, parent?)</code>: replaces any existing indicator with a new disc, parented to <code>parent</code> (defaults to <code>workspace</code>).</li>
+<li><code>update(position)</code>: moves the indicator onto a ground position.</li>
+<li><code>destroy()</code>: removes the indicator.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="characterrigutil">CharacterRigUtil<a href="#characterrigutil" class="hash-link" aria-label="Direct link to CharacterRigUtil" title="Direct link to CharacterRigUtil">​</a></h3>
+<p>Helpers for character rigs, humanoids and skinned meshes.</p>
+<ul>
+<li><code>waitForHumanoid(character, timeout)</code>: returns the character&#x27;s Humanoid, waiting up to <code>timeout</code> seconds.</li>
+<li><code>waitForAnimator(humanoid, timeout)</code>: returns the humanoid&#x27;s Animator, waiting up to <code>timeout</code> seconds.</li>
+<li><code>findBodyPart(character, name)</code>: finds a body part by name, resolving accessory handles to their MeshPart.</li>
+<li><code>waitForBodyPart(character, name, timeout)</code>: polls <code>findBodyPart</code> until it succeeds, times out, or the character is removed.</li>
+<li><code>getFeetY(rootPart, humanoid)</code>: the world Y of the character&#x27;s feet.</li>
+<li><code>standRootOn(character, rootPart, humanoid, groundCFrame)</code>: pivots the character so its feet rest on <code>groundCFrame</code>.</li>
+<li><code>isGroundedState(state)</code>: whether a HumanoidStateType counts as grounded.</li>
+<li><code>findSkinnedMesh(character)</code>: the MeshPart whose Bones pose a skinned character, or nil for a jointed rig.</li>
+<li><code>collectCharacterBones(character)</code>: every Bone under the character, parents before children.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="dateutil">DateUtil<a href="#dateutil" class="hash-link" aria-label="Direct link to DateUtil" title="Direct link to DateUtil">​</a></h3>
+<p>Timestamps, periods and human-readable durations.</p>
+<ul>
+<li><code>SECONDS_PER_DAY</code>, <code>SECONDS_PER_WEEK</code>: constants.</li>
+<li><code>dateTimeComponentsToTimestamp(components)</code>: converts UTC date components to a unix timestamp in seconds.</li>
+<li><code>unix()</code>: the current UTC unix timestamp in seconds.</li>
+<li><code>getPeriod(timestamp, duration, offset?)</code>: the index of the fixed-length period containing <code>timestamp</code>.</li>
+<li><code>getPeriodEnd(period, duration, offset?)</code>: the timestamp at which a period ends.</li>
+<li><code>formatDuration(seconds)</code>: formats seconds as <code>1h 2m 5s</code>.</li>
+<li><code>timeAgoUnix(timestamp, endTimestamp?)</code>: seconds elapsed since <code>timestamp</code>.</li>
+<li><code>formatUnix(timestamp, format, locale?)</code>: formats a timestamp with a DateTime format string.</li>
+<li><code>unixToClockFormat(timestamp, format?, locale?)</code>: formats a timestamp as <code>mm:ss</code> by default.</li>
+<li><code>timeAgo(timestamp, endTimestamp?)</code>: a readable &quot;time ago&quot; string, such as <code>1 minute 20 seconds ago</code>.</li>
+<li><code>totalTime(timestamp, endTimestamp?, separator?, depth?)</code>: a readable total duration with an optional unit limit.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="fixedrewardsequence">FixedRewardSequence<a href="#fixedrewardsequence" class="hash-link" aria-label="Direct link to FixedRewardSequence" title="Direct link to FixedRewardSequence">​</a></h3>
+<ul>
+<li><code>build(weights)</code>: builds a deterministic, evenly spread reward sequence whose frequencies match <code>weights</code>, starting at the rarest reward.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="groundutil">GroundUtil<a href="#groundutil" class="hash-link" aria-label="Direct link to GroundUtil" title="Direct link to GroundUtil">​</a></h3>
+<ul>
+<li><code>projectDown(position, depth, raycastParams, resultOffset?)</code>: raycasts straight down and returns the hit position plus an optional offset.</li>
+<li><code>raycast(origin, direction, filterList?, filterType?, collisionGroup?)</code>: a one-call raycast that builds its RaycastParams for you.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="instanceutil">InstanceUtil<a href="#instanceutil" class="hash-link" aria-label="Direct link to InstanceUtil" title="Direct link to InstanceUtil">​</a></h3>
+<ul>
+<li><code>FindFirstAncestorWithTag(instance, tag)</code>: the nearest ancestor with a CollectionService tag.</li>
+<li><code>GetDescendantsWithTag(instance, tag)</code>: every descendant with a tag.</li>
+<li><code>ExpectChild(parent, name)</code>: returns a child, or errors with its full path if it is missing.</li>
+<li><code>findFirstChildWithTag(instance, tagName)</code>: the first direct child with a tag.</li>
+<li><code>weldParts(part0, part1)</code>: welds two parts with a WeldConstraint.</li>
+<li><code>weldAttachments(attach1, attach2)</code>: joins two attachments with a RigidConstraint.</li>
+<li><code>lookAt(object, target, rotateOnYAxis?)</code>: tweens a part to face a target and returns a Promise that resolves when the tween ends.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="janitorutil">JanitorUtil<a href="#janitorutil" class="hash-link" aria-label="Direct link to JanitorUtil" title="Direct link to JanitorUtil">​</a></h3>
+<ul>
+<li><code>safeDestroy(janitor?)</code>: destroys a Janitor unless it is nil or already cleaning, and warns instead of throwing on failure.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="layoututil">LayoutUtil<a href="#layoututil" class="hash-link" aria-label="Direct link to LayoutUtil" title="Direct link to LayoutUtil">​</a></h3>
+<p>Keeps ScrollingFrame canvases and items sized correctly.</p>
+<ul>
+<li><code>resolveUDim(size, referenceSize)</code>: converts a UDim to pixels against a reference size.</li>
+<li><code>FixScrollingCanvas(layout, scrollingFrame, padding?)</code>: keeps CanvasSize fitted to the layout&#x27;s content and padding. Returns a cleanup function.</li>
+<li><code>FixAuthoredListHeights(scrollingFrame, layout, items)</code>: locks list items and padding to their authored heights relative to the viewport. Returns a cleanup function.</li>
+<li><code>FixLayout(layout, scrollingFrame, itemAspectRatio?, padding?)</code>: applies aspect-ratio constraints to items and keeps the vertical canvas fitted. Returns a cleanup function.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="mathutil">MathUtil<a href="#mathutil" class="hash-link" aria-label="Direct link to MathUtil" title="Direct link to MathUtil">​</a></h3>
+<ul>
+<li><code>lerp(start, stop, alpha)</code>: linear interpolation.</li>
+<li><code>round(number)</code>: rounds to the nearest integer.</li>
+<li><code>roundNumber(num, numPlaces)</code>: rounds to the nearest value with a number of decimal places.</li>
+<li><code>formatInt(number, decimals?)</code>: adds thousands separators, such as <code>1,000.01</code>.</li>
+<li><code>shortenNumber(number, minimumTiers?)</code>: abbreviates large numbers, such as <code>1.2K</code> or <code>3M</code>.</li>
+<li><code>random(min, max?, float?)</code>: a random integer or float. <code>min</code> defaults to 1 when only one number is given.</li>
+<li><code>randomRange(min, max)</code>: a random float in a range.</li>
+<li><code>randomString(length?)</code>: a random alphanumeric string, 18 characters by default.</li>
+<li><code>randomObj(tableOrInstance)</code>: a random array element or child.</li>
+<li><code>randomInDisc(radius)</code>: a uniformly random flat offset inside a disc.</li>
+<li><code>getRandomInPart(part)</code>: a random CFrame on a part&#x27;s XZ plane.</li>
+<li><code>getVector3(object)</code>: extracts a position from a Vector3, CFrame, Attachment, BasePart, value object or Camera.</li>
+<li><code>getDistance(origin, target)</code>: the distance between any two values <code>getVector3</code> supports.</li>
+<li><code>getPartBottomSurface(part)</code>: the CFrame at the centre of a part&#x27;s bottom face.</li>
+<li><code>isNumberSecure(value)</code>: true only for non-negative numbers.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="particleutil">ParticleUtil<a href="#particleutil" class="hash-link" aria-label="Direct link to ParticleUtil" title="Direct link to ParticleUtil">​</a></h3>
+<ul>
+<li><code>waitForTemplate(name, folder)</code>, <code>waitForPart(name, folder)</code>, <code>waitForModel(name, folder)</code>: wait up to 5 seconds for a typed asset in <code>folder</code>, and warn if it is missing or the wrong class.</li>
+<li><code>burst(template, cframe)</code>: clones an attachment, emits each emitter&#x27;s <code>EmitCount</code> attribute after its optional <code>EmitDelay</code>, then cleans up.</li>
+<li><code>setEnabled(root, enabled)</code>: toggles every ParticleEmitter under <code>root</code>.</li>
+<li><code>release(root)</code>: stops emitters and lights, then destroys <code>root</code> after its particles finish.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="playerutil">PlayerUtil<a href="#playerutil" class="hash-link" aria-label="Direct link to PlayerUtil" title="Direct link to PlayerUtil">​</a></h3>
+<ul>
+<li><code>ensureAnimator(character)</code>: returns the character&#x27;s Animator, creating one if needed.</li>
+<li><code>loadAnimation(janitor, character, animationId)</code>: loads an Action4 track that the Janitor stops and destroys.</li>
+<li><code>getHumanoid(object)</code>: the Humanoid of a Player, character Model or Humanoid.</li>
+<li><code>isAlive(object)</code>, <code>hasHumanoid(object)</code>: humanoid health and presence checks.</li>
+<li><code>getCharacterHeight(character)</code>: the character&#x27;s bounding-box height.</li>
+<li><code>getPositiontAtFeet(character)</code>: the world position at the character&#x27;s feet.</li>
+<li><code>getCharacterInformation(player)</code>: returns the character, Humanoid and HumanoidRootPart.</li>
+<li><code>getPlayerFromInstance(part)</code> (alias <code>getPlayerFromPart</code>): the Player whose character contains a part.</li>
+<li><code>getGroupRank(player, groupId)</code>: a cached group rank lookup.</li>
+<li><code>isCreator(player)</code>, <code>getUserLevel(player)</code>, <code>userLevel</code>: checks for the game creator, group staff and Premium.</li>
+<li><code>disableOtherUi(value, exception?)</code>: client only. Hides or restores every ScreenGui except <code>exception</code> and Topbar GUIs.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="profileutil">ProfileUtil<a href="#profileutil" class="hash-link" aria-label="Direct link to ProfileUtil" title="Direct link to ProfileUtil">​</a></h3>
+<ul>
+<li><code>scope(label, callback)</code>: runs a non-yielding callback inside a named MicroProfiler scope and returns its results.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="projectileutil">ProjectileUtil<a href="#projectileutil" class="hash-link" aria-label="Direct link to ProjectileUtil" title="Direct link to ProjectileUtil">​</a></h3>
+<p>Ballistic projectiles and aim previews.</p>
+<ul>
+<li><code>calculateLaunchVelocity(origin, target, duration, gravity?)</code>: the launch velocity needed to hit <code>target</code> in <code>duration</code> seconds.</li>
+<li><code>getPositionAtTime(origin, velocity, time, gravity?)</code>, <code>getVelocityAtTime(velocity, time, gravity?)</code>: the arc&#x27;s position and velocity at a time.</li>
+<li><code>launch(config)</code>: animates an anchored part along the arc, with optional raycast hits and bounces. Returns a controller with <code>Cancel</code> and <code>IsActive</code>.</li>
+<li><code>createAimBeam(config)</code>: draws the arc with a single curved Beam. Returns an object with <code>Update</code> and <code>Destroy</code>.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="searchutil">SearchUtil<a href="#searchutil" class="hash-link" aria-label="Direct link to SearchUtil" title="Direct link to SearchUtil">​</a></h3>
+<ul>
+<li><code>getPartCount(instance)</code>, <code>getDescendantParts(instance)</code>: count or collect descendant BaseParts.</li>
+<li><code>getFirstPart(instance)</code>: the first BasePart child.</li>
+<li><code>getAncestor(child, nameOrPredicate)</code>: the first ancestor, or the instance itself, that matches.</li>
+<li><code>find(node, keyOrPredicate, maxDepth?)</code>: a breadth-limited search through Instance children or nested tables.</li>
+<li><code>exists(node, names)</code>: whether every named child or key exists.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="systemutil">SystemUtil<a href="#systemutil" class="hash-link" aria-label="Direct link to SystemUtil" title="Direct link to SystemUtil">​</a></h3>
+<ul>
+<li><code>timeout(delay, callback)</code>: runs <code>callback</code> after <code>delay</code> seconds.</li>
+<li><code>interval(interval, callback)</code>: runs <code>callback(elapsed, dt)</code> every <code>interval</code> seconds until it returns <code>false</code>. Returns the connection.</li>
+<li><code>inTable(table, value)</code>: whether a value is in a table.</li>
+<li><code>disconnect(connectionOrList)</code>: disconnects one connection or a list of them.</li>
+<li><code>getProductInfo(productId, infoType?)</code>: a cached, pcall-wrapped <code>MarketplaceService:GetProductInfo</code>.</li>
+<li><code>isMobile()</code>, <code>isConsole()</code>: input-based platform checks.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="tablediffutil">TableDiffUtil<a href="#tablediffutil" class="hash-link" aria-label="Direct link to TableDiffUtil" title="Direct link to TableDiffUtil">​</a></h3>
+<ul>
+<li><code>shallowEqual(left, right)</code>: whether two tables have the same keys and values.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="tableutil">TableUtil<a href="#tableutil" class="hash-link" aria-label="Direct link to TableUtil" title="Direct link to TableUtil">​</a></h3>
+<ul>
+<li><code>flip</code>, <code>map</code>, <code>filter</code>, <code>mapIndex</code>: transform tables, or an Instance&#x27;s children.</li>
+<li><code>extend</code>, <code>assign</code>: merge tables, with an optional deep merge.</li>
+<li><code>split</code>, <code>join</code>, <code>trimWhitespace</code>, <code>trimLeadingWhitespace</code>, <code>trimTrailingWhitespace</code>: string helpers.</li>
+<li><code>treePath(tree, path, delimiter?)</code>: reads a dotted path through a table or Instance tree.</li>
+<li><code>insertIf(target, value, condition)</code>: appends a value only if the condition passes.</li>
+<li><code>instanceChildrenToTable(instance)</code>: maps child names to children.</li>
+<li><code>makeConfigFromValues(folder)</code>: converts a Folder or Configuration of value objects into a nested table.</li>
+<li><code>tableLength</code>, <code>indexOf</code>, <code>tableRandom</code>, <code>tableRandomIndex</code>, <code>tableRemove</code>: counting, lookup, random picks and in-place removal.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="vfxutil">VfxUtil<a href="#vfxutil" class="hash-link" aria-label="Direct link to VfxUtil" title="Direct link to VfxUtil">​</a></h3>
+<p>Plays VFX templates whose emitters are configured with <code>EmitCount</code>, <code>EmitDelay</code> and <code>EmitDuration</code> attributes.</p>
+<ul>
+<li><code>uprightAt(template, position)</code>: a CFrame at <code>position</code> that keeps the template&#x27;s rotation.</li>
+<li><code>play(template, cframe, parent?)</code>: plays a one-shot clone, parented to <code>parent</code> (defaults to <code>workspace</code>), and cleans it up when finished.</li>
+<li><code>attach(template, part)</code>: welds a continuously emitting clone to <code>part</code> and returns a stop function.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="license">License<a href="#license" class="hash-link" aria-label="Direct link to License" title="Direct link to License">​</a></h2>
+<p>MIT</p></article></div><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#installation" class="table-of-contents__link toc-highlight">Installation</a></li><li><a href="#usage" class="table-of-contents__link toc-highlight">Usage</a></li><li><a href="#modules" class="table-of-contents__link toc-highlight">Modules</a><ul><li><a href="#aimindicator" class="table-of-contents__link toc-highlight">AimIndicator</a></li><li><a href="#characterrigutil" class="table-of-contents__link toc-highlight">CharacterRigUtil</a></li><li><a href="#dateutil" class="table-of-contents__link toc-highlight">DateUtil</a></li><li><a href="#fixedrewardsequence" class="table-of-contents__link toc-highlight">FixedRewardSequence</a></li><li><a href="#groundutil" class="table-of-contents__link toc-highlight">GroundUtil</a></li><li><a href="#instanceutil" class="table-of-contents__link toc-highlight">InstanceUtil</a></li><li><a href="#janitorutil" class="table-of-contents__link toc-highlight">JanitorUtil</a></li><li><a href="#layoututil" class="table-of-contents__link toc-highlight">LayoutUtil</a></li><li><a href="#mathutil" class="table-of-contents__link toc-highlight">MathUtil</a></li><li><a href="#particleutil" class="table-of-contents__link toc-highlight">ParticleUtil</a></li><li><a href="#playerutil" class="table-of-contents__link toc-highlight">PlayerUtil</a></li><li><a href="#profileutil" class="table-of-contents__link toc-highlight">ProfileUtil</a></li><li><a href="#projectileutil" class="table-of-contents__link toc-highlight">ProjectileUtil</a></li><li><a href="#searchutil" class="table-of-contents__link toc-highlight">SearchUtil</a></li><li><a href="#systemutil" class="table-of-contents__link toc-highlight">SystemUtil</a></li><li><a href="#tablediffutil" class="table-of-contents__link toc-highlight">TableDiffUtil</a></li><li><a href="#tableutil" class="table-of-contents__link toc-highlight">TableUtil</a></li><li><a href="#vfxutil" class="table-of-contents__link toc-highlight">VfxUtil</a></li></ul></li><li><a href="#license" class="table-of-contents__link toc-highlight">License</a></li></ul></div></div></div></main></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Breezy1214. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

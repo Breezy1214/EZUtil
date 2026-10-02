@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="plugin-moonwave plugin-id-moonwave" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">ProjectileUtil | EZUtil</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://Breezy1214.github.io/EZUtil/api/ProjectileUtil"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="ProjectileUtil | EZUtil"><meta data-rh="true" name="description" content="Ballistic projectile helpers: solve the launch velocity that reaches a target in a
+given time, move a part along that arc with optional hits and bounces, and draw
+the arc as an aim preview.
+
+Gravity defaults to `workspace.Gravity` (read when the module is first required),
+pointing down.
+
+```lua
+local controller = ProjectileUtil.launch({
+	part = rock,
+	origin = hand.Position,
+	target = mouseHit,
+	duration = 0.8,
+	raycastParams = params,
+	onHit = function(position, normal)
+		rock:Destroy()
+	end,
+})
+```"><meta data-rh="true" property="og:description" content="Ballistic projectile helpers: solve the launch velocity that reaches a target in a
+given time, move a part along that arc with optional hits and bounces, and draw
+the arc as an aim preview.
+
+Gravity defaults to `workspace.Gravity` (read when the module is first required),
+pointing down.
+
+```lua
+local controller = ProjectileUtil.launch({
+	part = rock,
+	origin = hand.Position,
+	target = mouseHit,
+	duration = 0.8,
+	raycastParams = params,
+	onHit = function(position, normal)
+		rock:Destroy()
+	end,
+})
+```"><link data-rh="true" rel="canonical" href="https://Breezy1214.github.io/EZUtil/api/ProjectileUtil"><link data-rh="true" rel="alternate" href="https://Breezy1214.github.io/EZUtil/api/ProjectileUtil" hreflang="en"><link data-rh="true" rel="alternate" href="https://Breezy1214.github.io/EZUtil/api/ProjectileUtil" hreflang="x-default"><link rel="stylesheet" href="/EZUtil/assets/css/styles.b9f2c64d.css">
+<script src="/EZUtil/assets/js/runtime~main.fd89ad75.js" defer="defer"></script>
+<script src="/EZUtil/assets/js/main.4106c634.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/EZUtil/"><b class="navbar__title text--truncate">EZUtil</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/EZUtil/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/Breezy1214/EZUtil" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/EZUtil">​E​Z​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/AimIndicator">​Aim​Indicator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/CharacterRigUtil">​Character​Rig​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/DateUtil">​Date​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/FixedRewardSequence">​Fixed​Reward​Sequence</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/GroundUtil">​Ground​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/InstanceUtil">​Instance​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/JanitorUtil">​Janitor​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/LayoutUtil">​Layout​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/MathUtil">​Math​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/ParticleUtil">​Particle​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/PlayerUtil">​Player​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/ProfileUtil">​Profile​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/EZUtil/api/ProjectileUtil">​Projectile​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/SearchUtil">​Search​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/SystemUtil">​System​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/TableDiffUtil">​Table​Diff​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/TableUtil">​Table​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/VfxUtil">​Vfx​Util</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">Projectile</span><span style="display:inline-block">Util</span></h1><div class="luaClassTags_EipM"></div><div>
+<p>
+  Ballistic projectile helpers: solve the launch velocity that reaches a target in a
+  given time, move a part along that arc with optional hits and bounces, and draw
+  the arc as an aim preview.
+</p>
+<p>
+  Gravity defaults to <code>workspace.Gravity</code> (read when the module is first required),
+  pointing down.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> controller <span class="token operator">=</span> ProjectileUtil<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+	part <span class="token operator">=</span> rock<span class="token punctuation">,</span>
+	origin <span class="token operator">=</span> hand<span class="token punctuation">.</span>Position<span class="token punctuation">,</span>
+	target <span class="token operator">=</span> mouseHit<span class="token punctuation">,</span>
+	duration <span class="token operator">=</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
+	raycastParams <span class="token operator">=</span> params<span class="token punctuation">,</span>
+	onHit <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>position<span class="token punctuation">,</span> normal<span class="token punctuation">)</span>
+		rock<span class="token punctuation">:</span><span class="token function">Destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">end</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="types">Types<a href="#types" class="hash-link" aria-label="Direct link to Types" title="Direct link to Types">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="ProjectileConfig"><code style="text-decoration:none">ProjectileConfig</code><a href="#ProjectileConfig" class="hash-link" aria-label="Direct link to ProjectileConfig" title="Direct link to ProjectileConfig">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/ProjectileUtil.luau#L47"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>ProjectileConfig<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>part<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/BasePart" target="_blank" rel="noopener noreferrer">BasePart<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>The part to move. It is anchored for the flight.</p>
+</span></span></div><div><code>origin<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Where the flight starts.</p>
+</span></span></div><div><code>target<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Where the arc lands after <code>duration</code> seconds.</p>
+</span></span></div><div><code>duration<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>Flight time in seconds.</p>
+</span></span></div><div><code>faceDirection<!-- -->: </code><code class="blue_P4bS">boolean?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Point the part along its velocity. Defaults to false.</p>
+</span></span></div><div><code>gravity<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Defaults to <code>workspace.Gravity</code>, pointing down.</p>
+</span></span></div><div><code>raycastParams<!-- -->: </code><code class="blue_P4bS">RaycastParams?</code><span class="inlineDescription_G7Er">-- <span>
+<p>When set, each frame's movement is raycast to detect hits.</p>
+</span></span></div><div><code>maxBounces<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>How many times to bounce off hit surfaces before stopping. Defaults to 0.</p>
+</span></span></div><div><code>bounceDamping<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Velocity multiplier applied on each bounce. Defaults to 0.7.</p>
+</span></span></div><div><code>onHit<!-- -->: </code><code class="purple_ieR2">(</code><code class="green_DgR4">(</code><div class="inset_uKQm"><code>position<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="green_DgR4">,</code></div><div class="inset_uKQm"><code>normal<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div><code class="green_DgR4">)</code><code class="green_DgR4"> → </code><code class="green_DgR4">(</code><code class="green_DgR4">)</code><code class="purple_ieR2">)</code><code class="blue_P4bS">?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Called once when the flight ends. <code>normal</code> is nil when it ends by reaching the end of the arc.</p>
+</span></span></div><div><code>onBounce<!-- -->: </code><code class="purple_ieR2">(</code><code class="green_DgR4">(</code><div class="inset_uKQm"><code>position<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="green_DgR4">,</code></div><div class="inset_uKQm"><code>normal<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="green_DgR4">,</code></div><div class="inset_uKQm"><code>bouncesLeft<!-- -->: </code><code class="blue_P4bS">number</code></div><code class="green_DgR4">)</code><code class="green_DgR4"> → </code><code class="green_DgR4">(</code><code class="green_DgR4">)</code><code class="purple_ieR2">)</code><code class="blue_P4bS">?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Called after each bounce.</p>
+</span></span></div></div><code>}</code></div><div>
+<p>Options for <a href="/EZUtil/api/ProjectileUtil#launch">ProjectileUtil.launch</a>.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="ProjectileController"><code style="text-decoration:none">ProjectileController</code><a href="#ProjectileController" class="hash-link" aria-label="Direct link to ProjectileController" title="Direct link to ProjectileController">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/ProjectileUtil.luau#L69"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>ProjectileController<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>Cancel<!-- -->: </code><code class="purple_ieR2">(</code><code>self<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/EZUtil/api/ProjectileUtil#ProjectileController">ProjectileController</a></code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>Stops the flight where it is, without calling <code>onHit</code>.</p>
+</span></span></div><div><code>IsActive<!-- -->: </code><code class="purple_ieR2">(</code><code>self<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/EZUtil/api/ProjectileUtil#ProjectileController">ProjectileController</a></code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="blue_P4bS">boolean</code><span class="inlineDescription_G7Er">-- <span>
+<p>Whether the projectile is still flying.</p>
+</span></span></div></div><code>}</code></div><div>
+<p>Returned by <a href="/EZUtil/api/ProjectileUtil#launch">ProjectileUtil.launch</a>.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="AimBeamConfig"><code style="text-decoration:none">AimBeamConfig</code><a href="#AimBeamConfig" class="hash-link" aria-label="Direct link to AimBeamConfig" title="Direct link to AimBeamConfig">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/ProjectileUtil.luau#L88"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>AimBeamConfig<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>origin<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Where the arc starts.</p>
+</span></span></div><div><code>target<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Where the arc lands.</p>
+</span></span></div><div><code>duration<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>Flight time in seconds, which sets how high the arc goes.</p>
+</span></span></div><div><code>gravity<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Defaults to <code>workspace.Gravity</code>, pointing down.</p>
+</span></span></div><div><code>parent<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Where to put the beam's holder part.</p>
+</span></span></div><div><code>color<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Color3" target="_blank" rel="noopener noreferrer">Color3?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Defaults to white.</p>
+</span></span></div><div><code>width<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Defaults to 0.5.</p>
+</span></span></div><div><code>transparency<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/NumberSequence" target="_blank" rel="noopener noreferrer">NumberSequence?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Defaults to 0.5.</p>
+</span></span></div></div><code>}</code></div><div>
+<p>Options for <a href="/EZUtil/api/ProjectileUtil#createAimBeam">ProjectileUtil.createAimBeam</a>.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="AimBeam"><code style="text-decoration:none">AimBeam</code><a href="#AimBeam" class="hash-link" aria-label="Direct link to AimBeam" title="Direct link to AimBeam">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/ProjectileUtil.luau#L107"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code class="purple_ieR2">interface</code> <code>AimBeam<!-- --> <!-- -->{</code><div class="inset_uKQm"><div><code>Update<!-- -->: </code><code class="purple_ieR2">(</code><div class="inset_uKQm"><code>self<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/EZUtil/api/ProjectileUtil#AimBeam">AimBeam</a></code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code>origin<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code>target<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code>duration<!-- -->: </code><code class="blue_P4bS">number</code></div><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>Redraws the arc.</p>
+</span></span></div><div><code>Destroy<!-- -->: </code><code class="purple_ieR2">(</code><code>self<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/EZUtil/api/ProjectileUtil#AimBeam">AimBeam</a></code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>Destroys the beam and its holder part.</p>
+</span></span></div></div><code>}</code></div><div>
+<p>Returned by <a href="/EZUtil/api/ProjectileUtil#createAimBeam">ProjectileUtil.createAimBeam</a>.</p>
+</div><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="calculateLaunchVelocity"><code style="text-decoration:none">calculateLaunchVelocity</code><a href="#calculateLaunchVelocity" class="hash-link" aria-label="Direct link to calculateLaunchVelocity" title="Direct link to calculateLaunchVelocity">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/ProjectileUtil.luau#L162"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>ProjectileUtil<!-- -->.</code><code class="green_DgR4">calculateLaunchVelocity</code><code>(</code><div class="inset_uKQm"><div><code>origin<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>target<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>duration<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>Flight time in seconds.</p>
+</span></span></div><div><code>gravity<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Defaults to <code>workspace.Gravity</code>, pointing down.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div><div>
+<p>
+  Returns the initial velocity that carries a projectile from <code>origin</code> to <code>target</code>
+  in exactly <code>duration</code> seconds under <code>gravity</code>.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getPositionAtTime"><code style="text-decoration:none">getPositionAtTime</code><a href="#getPositionAtTime" class="hash-link" aria-label="Direct link to getPositionAtTime" title="Direct link to getPositionAtTime">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/ProjectileUtil.luau#L182"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>ProjectileUtil<!-- -->.</code><code class="green_DgR4">getPositionAtTime</code><code>(</code><div class="inset_uKQm"><div><code>origin<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>velocity<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The launch velocity.</p>
+</span></span></div><div><code>time<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>Seconds since launch.</p>
+</span></span></div><div><code>gravity<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Defaults to <code>workspace.Gravity</code>, pointing down.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div><div>
+<p>Returns the projectile's position <code>time</code> seconds after launch.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getVelocityAtTime"><code style="text-decoration:none">getVelocityAtTime</code><a href="#getVelocityAtTime" class="hash-link" aria-label="Direct link to getVelocityAtTime" title="Direct link to getVelocityAtTime">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/ProjectileUtil.luau#L196"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>ProjectileUtil<!-- -->.</code><code class="green_DgR4">getVelocityAtTime</code><code>(</code><div class="inset_uKQm"><div><code>velocity<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The launch velocity.</p>
+</span></span></div><div><code>time<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>Seconds since launch.</p>
+</span></span></div><div><code>gravity<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Defaults to <code>workspace.Gravity</code>, pointing down.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div><div>
+<p>Returns the projectile's velocity <code>time</code> seconds after launch.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="launch"><code style="text-decoration:none">launch</code><a href="#launch" class="hash-link" aria-label="Direct link to launch" title="Direct link to launch">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/ProjectileUtil.luau#L215"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>ProjectileUtil<!-- -->.</code><code class="green_DgR4">launch</code><code>(</code><code>config<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/EZUtil/api/ProjectileUtil#ProjectileConfig">ProjectileConfig</a></code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/EZUtil/api/ProjectileUtil#ProjectileController">ProjectileController</a></code></div><div>
+<p>
+  Anchors <code>config.part</code> and moves it along the ballistic arc from <code>config.origin</code> to
+  <code>config.target</code> every Heartbeat.
+</p>
+<p>
+  Without <code>raycastParams</code> the part flies the full arc and <code>onHit</code> is called with
+  the final position and a nil normal. With <code>raycastParams</code>, each frame's movement
+  is raycast: on a hit the part either bounces (reflecting its velocity, scaled by
+  <code>bounceDamping</code>, while bounces remain) or stops and calls <code>onHit</code> with the hit
+  position and surface normal.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="createAimBeam"><code style="text-decoration:none">createAimBeam</code><a href="#createAimBeam" class="hash-link" aria-label="Direct link to createAimBeam" title="Direct link to createAimBeam">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/ProjectileUtil.luau#L352"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>ProjectileUtil<!-- -->.</code><code class="green_DgR4">createAimBeam</code><code>(</code><code>config<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/EZUtil/api/ProjectileUtil#AimBeamConfig">AimBeamConfig</a></code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/EZUtil/api/ProjectileUtil#AimBeam">AimBeam</a></code></div><div>
+<p>
+  Draws the ballistic arc from <code>config.origin</code> to <code>config.target</code> with a single
+  curved Beam, held by an invisible, anchored, non-colliding part parented to
+  <code>config.parent</code>. Call <code>Update</code> to redraw it as the aim changes.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> beam <span class="token operator">=</span> ProjectileUtil<span class="token punctuation">.</span><span class="token function">createAimBeam</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+	origin <span class="token operator">=</span> hand<span class="token punctuation">.</span>Position<span class="token punctuation">,</span>
+	target <span class="token operator">=</span> mouseHit<span class="token punctuation">,</span>
+	duration <span class="token operator">=</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
+	parent <span class="token operator">=</span> workspace<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+RunService<span class="token punctuation">.</span>RenderStepped<span class="token punctuation">:</span><span class="token function">Connect</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	beam<span class="token punctuation">:</span><span class="token function">Update</span><span class="token punctuation">(</span>hand<span class="token punctuation">.</span>Position<span class="token punctuation">,</span> mouseHit<span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span>
+</code></pre>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;calculateLaunchVelocity&quot;,
+            &quot;desc&quot;: &quot;Returns the initial velocity that carries a projectile from `origin` to `target`\nin exactly `duration` seconds under `gravity`.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;origin&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;target&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;duration&quot;,
+                    &quot;desc&quot;: &quot;Flight time in seconds.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;gravity&quot;,
+                    &quot;desc&quot;: &quot;Defaults to `workspace.Gravity`, pointing down.&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 162,
+                &quot;path&quot;: &quot;src/ProjectileUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getPositionAtTime&quot;,
+            &quot;desc&quot;: &quot;Returns the projectile&#x27;s position `time` seconds after launch.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;origin&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;velocity&quot;,
+                    &quot;desc&quot;: &quot;The launch velocity.&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;time&quot;,
+                    &quot;desc&quot;: &quot;Seconds since launch.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;gravity&quot;,
+                    &quot;desc&quot;: &quot;Defaults to `workspace.Gravity`, pointing down.&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 182,
+                &quot;path&quot;: &quot;src/ProjectileUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getVelocityAtTime&quot;,
+            &quot;desc&quot;: &quot;Returns the projectile&#x27;s velocity `time` seconds after launch.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;velocity&quot;,
+                    &quot;desc&quot;: &quot;The launch velocity.&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;time&quot;,
+                    &quot;desc&quot;: &quot;Seconds since launch.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;gravity&quot;,
+                    &quot;desc&quot;: &quot;Defaults to `workspace.Gravity`, pointing down.&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 196,
+                &quot;path&quot;: &quot;src/ProjectileUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;launch&quot;,
+            &quot;desc&quot;: &quot;Anchors `config.part` and moves it along the ballistic arc from `config.origin` to\n`config.target` every Heartbeat.\n\nWithout `raycastParams` the part flies the full arc and `onHit` is called with\nthe final position and a nil normal. With `raycastParams`, each frame&#x27;s movement\nis raycast: on a hit the part either bounces (reflecting its velocity, scaled by\n`bounceDamping`, while bounces remain) or stops and calls `onHit` with the hit\nposition and surface normal.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;config&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;ProjectileConfig&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;ProjectileController&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 215,
+                &quot;path&quot;: &quot;src/ProjectileUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;createAimBeam&quot;,
+            &quot;desc&quot;: &quot;Draws the ballistic arc from `config.origin` to `config.target` with a single\ncurved Beam, held by an invisible, anchored, non-colliding part parented to\n`config.parent`. Call `Update` to redraw it as the aim changes.\n\n```lua\nlocal beam = ProjectileUtil.createAimBeam({\n\torigin = hand.Position,\n\ttarget = mouseHit,\n\tduration = 0.8,\n\tparent = workspace,\n})\n\nRunService.RenderStepped:Connect(function()\n\tbeam:Update(hand.Position, mouseHit, 0.8)\nend)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;config&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;AimBeamConfig&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;AimBeam&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 352,
+                &quot;path&quot;: &quot;src/ProjectileUtil.luau&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [],
+    &quot;types&quot;: [
+        {
+            &quot;name&quot;: &quot;ProjectileConfig&quot;,
+            &quot;desc&quot;: &quot;Options for [ProjectileUtil.launch].&quot;,
+            &quot;fields&quot;: [
+                {
+                    &quot;name&quot;: &quot;part&quot;,
+                    &quot;lua_type&quot;: &quot;BasePart&quot;,
+                    &quot;desc&quot;: &quot;The part to move. It is anchored for the flight.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;origin&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;,
+                    &quot;desc&quot;: &quot;Where the flight starts.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;target&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;,
+                    &quot;desc&quot;: &quot;Where the arc lands after `duration` seconds.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;duration&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;Flight time in seconds.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;faceDirection&quot;,
+                    &quot;lua_type&quot;: &quot;boolean?&quot;,
+                    &quot;desc&quot;: &quot;Point the part along its velocity. Defaults to false.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;gravity&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3?&quot;,
+                    &quot;desc&quot;: &quot;Defaults to `workspace.Gravity`, pointing down.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;raycastParams&quot;,
+                    &quot;lua_type&quot;: &quot;RaycastParams?&quot;,
+                    &quot;desc&quot;: &quot;When set, each frame&#x27;s movement is raycast to detect hits.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;maxBounces&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;,
+                    &quot;desc&quot;: &quot;How many times to bounce off hit surfaces before stopping. Defaults to 0.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;bounceDamping&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;,
+                    &quot;desc&quot;: &quot;Velocity multiplier applied on each bounce. Defaults to 0.7.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;onHit&quot;,
+                    &quot;lua_type&quot;: &quot;((position: Vector3, normal: Vector3?) -&gt; ())?&quot;,
+                    &quot;desc&quot;: &quot;Called once when the flight ends. `normal` is nil when it ends by reaching the end of the arc.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;onBounce&quot;,
+                    &quot;lua_type&quot;: &quot;((position: Vector3, normal: Vector3, bouncesLeft: number) -&gt; ())?&quot;,
+                    &quot;desc&quot;: &quot;Called after each bounce.&quot;
+                }
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 47,
+                &quot;path&quot;: &quot;src/ProjectileUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;ProjectileController&quot;,
+            &quot;desc&quot;: &quot;Returned by [ProjectileUtil.launch].&quot;,
+            &quot;fields&quot;: [
+                {
+                    &quot;name&quot;: &quot;Cancel&quot;,
+                    &quot;lua_type&quot;: &quot;(self: ProjectileController) -&gt; ()&quot;,
+                    &quot;desc&quot;: &quot;Stops the flight where it is, without calling `onHit`.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;IsActive&quot;,
+                    &quot;lua_type&quot;: &quot;(self: ProjectileController) -&gt; boolean&quot;,
+                    &quot;desc&quot;: &quot;Whether the projectile is still flying.&quot;
+                }
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 69,
+                &quot;path&quot;: &quot;src/ProjectileUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;AimBeamConfig&quot;,
+            &quot;desc&quot;: &quot;Options for [ProjectileUtil.createAimBeam].&quot;,
+            &quot;fields&quot;: [
+                {
+                    &quot;name&quot;: &quot;origin&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;,
+                    &quot;desc&quot;: &quot;Where the arc starts.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;target&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;,
+                    &quot;desc&quot;: &quot;Where the arc lands.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;duration&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;Flight time in seconds, which sets how high the arc goes.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;gravity&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3?&quot;,
+                    &quot;desc&quot;: &quot;Defaults to `workspace.Gravity`, pointing down.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;parent&quot;,
+                    &quot;lua_type&quot;: &quot;Instance&quot;,
+                    &quot;desc&quot;: &quot;Where to put the beam&#x27;s holder part.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;color&quot;,
+                    &quot;lua_type&quot;: &quot;Color3?&quot;,
+                    &quot;desc&quot;: &quot;Defaults to white.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;width&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;,
+                    &quot;desc&quot;: &quot;Defaults to 0.5.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;transparency&quot;,
+                    &quot;lua_type&quot;: &quot;NumberSequence?&quot;,
+                    &quot;desc&quot;: &quot;Defaults to 0.5.&quot;
+                }
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 88,
+                &quot;path&quot;: &quot;src/ProjectileUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;AimBeam&quot;,
+            &quot;desc&quot;: &quot;Returned by [ProjectileUtil.createAimBeam].&quot;,
+            &quot;fields&quot;: [
+                {
+                    &quot;name&quot;: &quot;Update&quot;,
+                    &quot;lua_type&quot;: &quot;(self: AimBeam, origin: Vector3, target: Vector3, duration: number) -&gt; ()&quot;,
+                    &quot;desc&quot;: &quot;Redraws the arc.&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;Destroy&quot;,
+                    &quot;lua_type&quot;: &quot;(self: AimBeam) -&gt; ()&quot;,
+                    &quot;desc&quot;: &quot;Destroys the beam and its holder part.&quot;
+                }
+            ],
+            &quot;source&quot;: {
+                &quot;line&quot;: 107,
+                &quot;path&quot;: &quot;src/ProjectileUtil.luau&quot;
+            }
+        }
+    ],
+    &quot;name&quot;: &quot;ProjectileUtil&quot;,
+    &quot;desc&quot;: &quot;Ballistic projectile helpers: solve the launch velocity that reaches a target in a\ngiven time, move a part along that arc with optional hits and bounces, and draw\nthe arc as an aim preview.\n\nGravity defaults to `workspace.Gravity` (read when the module is first required),\npointing down.\n\n```lua\nlocal controller = ProjectileUtil.launch({\n\tpart = rock,\n\torigin = hand.Position,\n\ttarget = mouseHit,\n\tduration = 0.8,\n\traycastParams = params,\n\tonHit = function(position, normal)\n\t\trock:Destroy()\n\tend,\n})\n```&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 25,
+        &quot;path&quot;: &quot;src/ProjectileUtil.luau&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#types" class="table-of-contents__link toc-highlight">Types</a><ul><li><a href="#AimBeam" class="table-of-contents__link toc-highlight">AimBeam</a></li><li><a href="#AimBeamConfig" class="table-of-contents__link toc-highlight">AimBeamConfig</a></li><li><a href="#ProjectileConfig" class="table-of-contents__link toc-highlight">ProjectileConfig</a></li><li><a href="#ProjectileController" class="table-of-contents__link toc-highlight">ProjectileController</a></li></ul></li><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#calculateLaunchVelocity" class="table-of-contents__link toc-highlight">.calculateLaunchVelocity</a></li><li><a href="#createAimBeam" class="table-of-contents__link toc-highlight">.createAimBeam</a></li><li><a href="#getPositionAtTime" class="table-of-contents__link toc-highlight">.getPositionAtTime</a></li><li><a href="#getVelocityAtTime" class="table-of-contents__link toc-highlight">.getVelocityAtTime</a></li><li><a href="#launch" class="table-of-contents__link toc-highlight">.launch</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Breezy1214. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="plugin-moonwave plugin-id-moonwave" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">TableUtil | EZUtil</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://Breezy1214.github.io/EZUtil/api/TableUtil"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="TableUtil | EZUtil"><meta data-rh="true" name="description" content="Table and string helpers: flipping, mapping, filtering and merging tables, reading
+paths through nested tables or Instances, splitting and joining strings, and
+random picks."><meta data-rh="true" property="og:description" content="Table and string helpers: flipping, mapping, filtering and merging tables, reading
+paths through nested tables or Instances, splitting and joining strings, and
+random picks."><link data-rh="true" rel="canonical" href="https://Breezy1214.github.io/EZUtil/api/TableUtil"><link data-rh="true" rel="alternate" href="https://Breezy1214.github.io/EZUtil/api/TableUtil" hreflang="en"><link data-rh="true" rel="alternate" href="https://Breezy1214.github.io/EZUtil/api/TableUtil" hreflang="x-default"><link rel="stylesheet" href="/EZUtil/assets/css/styles.b9f2c64d.css">
+<script src="/EZUtil/assets/js/runtime~main.fd89ad75.js" defer="defer"></script>
+<script src="/EZUtil/assets/js/main.4106c634.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/EZUtil/"><b class="navbar__title text--truncate">EZUtil</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/EZUtil/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/Breezy1214/EZUtil" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/EZUtil">​E​Z​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/AimIndicator">​Aim​Indicator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/CharacterRigUtil">​Character​Rig​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/DateUtil">​Date​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/FixedRewardSequence">​Fixed​Reward​Sequence</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/GroundUtil">​Ground​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/InstanceUtil">​Instance​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/JanitorUtil">​Janitor​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/LayoutUtil">​Layout​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/MathUtil">​Math​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/ParticleUtil">​Particle​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/PlayerUtil">​Player​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/ProfileUtil">​Profile​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/ProjectileUtil">​Projectile​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/SearchUtil">​Search​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/SystemUtil">​System​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/TableDiffUtil">​Table​Diff​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/EZUtil/api/TableUtil">​Table​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/VfxUtil">​Vfx​Util</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">Table</span><span style="display:inline-block">Util</span></h1><div class="luaClassTags_EipM"></div><div>
+<p>
+  Table and string helpers: flipping, mapping, filtering and merging tables, reading
+  paths through nested tables or Instances, splitting and joining strings, and
+  random picks.
+</p>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="flip"><code style="text-decoration:none">flip</code><a href="#flip" class="hash-link" aria-label="Direct link to flip" title="Direct link to flip">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L44"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">flip</code><code>(</code><div class="inset_uKQm"><div><code>source<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The table you want to flip</p>
+</span></span></div><div><code>mergeDuplicates<!-- -->: </code><code class="blue_P4bS">boolean?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Merge key duplicates into a table instead of overwriting them.</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code></div><div>
+<p>
+  Flips the table's keys with its values.
+  If <code>mergeDuplicates</code> is <code>true</code>, All values will be stored in a table at the key's index, instead of overwriting them.
+</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">flip</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- { [1] = "a", [2] = "b" }</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">flip</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">true</span><span class="token punctuation">)</span> <span class="token comment">-- { [1] = { "a" }, [2] = { "b" } }</span>
+
+<span class="token comment">-- Use case: finding all keys with the same value</span>
+<span class="token keyword">local</span> newTable <span class="token operator">=</span> TableUtil<span class="token punctuation">.</span><span class="token function">flip</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">true</span><span class="token punctuation">)</span> <span class="token comment">-- { [1] = { "a" }, [2] = { "b", "c" } }</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token operator">#</span>newTable<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">-- 2</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="map"><code style="text-decoration:none">map</code><a href="#map" class="hash-link" aria-label="Direct link to map" title="Direct link to map">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L89"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">map</code><code>(</code><div class="inset_uKQm"><div><code>source<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The table you want to map</p>
+</span></span></div><div><code>callbackFn<!-- -->: </code><code class="purple_ieR2">(</code><div class="inset_uKQm"><code class="blue_P4bS">any</code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code class="blue_P4bS">any</code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code class="blue_P4bS">any</code></div><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><div class="inset_uKQm"><code class="blue_P4bS">any</code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code class="blue_P4bS">any</code></div><code class="purple_ieR2">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>The function to map the table with</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code></div><div>
+<p>Maps a table or instance to a new table.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+	<span class="token keyword">return</span> v <span class="token operator">*</span> <span class="token number">2</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token comment">-- { 2, 4, 6 }</span>
+
+TableUtil<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+	<span class="token keyword">return</span> i <span class="token operator">*</span> <span class="token number">2</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token comment">-- { 2, 4, 6 }</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="filter"><code style="text-decoration:none">filter</code><a href="#filter" class="hash-link" aria-label="Direct link to filter" title="Direct link to filter">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L139"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">filter</code><code>(</code><div class="inset_uKQm"><div><code>source<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The table you want to filter</p>
+</span></span></div><div><code>callbackFn<!-- -->: </code><code class="purple_ieR2">(</code><div class="inset_uKQm"><code class="blue_P4bS">any</code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code class="blue_P4bS">any</code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code class="blue_P4bS">any</code></div><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="blue_P4bS">boolean?</code><code class="purple_ieR2">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>The function to filter the table with (element, index, source). Keeps elements it returns exactly <code>true</code> for.</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code></div><div>
+<p>Filters a table, or an Instance's children, into a new array.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> noTwo <span class="token operator">=</span> TableUtil<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+	<span class="token keyword">return</span> value <span class="token operator">~=</span> <span class="token number">2</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token comment">-- { 1, 3 }</span>
+
+<span class="token keyword">local</span> parts <span class="token operator">=</span> TableUtil<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>workspace<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+	<span class="token keyword">return</span> value<span class="token punctuation">:</span><span class="token function">IsA</span><span class="token punctuation">(</span><span class="token string">"Part"</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token comment">-- { Part, Part2 }</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="mapIndex"><code style="text-decoration:none">mapIndex</code><a href="#mapIndex" class="hash-link" aria-label="Direct link to mapIndex" title="Direct link to mapIndex">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L183"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">mapIndex</code><code>(</code><div class="inset_uKQm"><div><code>source<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The array you want to map</p>
+</span></span></div><div><code>filterFn<!-- -->: </code><code class="purple_ieR2">(</code><code class="green_DgR4">(</code><div class="inset_uKQm"><code>value<!-- -->: </code><code class="blue_P4bS">any</code><code class="green_DgR4">,</code></div><div class="inset_uKQm"><code>index<!-- -->: </code><code class="blue_P4bS">number</code><code class="green_DgR4">,</code></div><div class="inset_uKQm"><code>source<!-- -->: </code><code class="yellow_QJap">{</code><code class="blue_P4bS">any</code><code class="yellow_QJap">}</code></div><code class="green_DgR4">)</code><code class="green_DgR4"> → </code><code class="green_DgR4">(</code><div class="inset_uKQm"><code class="blue_P4bS">any?</code><code class="green_DgR4">,</code></div><div class="inset_uKQm"><code class="blue_P4bS">any?</code></div><code class="green_DgR4">)</code><code class="purple_ieR2">)</code><code class="blue_P4bS">?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Returns the new value and, optionally, the new key</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code></div><div>
+<p>
+  Maps an array to a new table. The callback can return a new value, and optionally
+  a new key to store it under; otherwise each value keeps its position.
+</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">mapIndex</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- { [1] = 1, [2] = 2, [3] = 3 }</span>
+
+TableUtil<span class="token punctuation">.</span><span class="token function">mapIndex</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+	<span class="token keyword">return</span> v <span class="token operator">*</span> <span class="token number">2</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token comment">-- { [1] = 2, [2] = 4, [3] = 6 }</span>
+
+TableUtil<span class="token punctuation">.</span><span class="token function">mapIndex</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+	<span class="token keyword">return</span> i<span class="token punctuation">,</span> v
+<span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token comment">-- { a = 1, b = 2 }</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="trimWhitespace"><code style="text-decoration:none">trimWhitespace</code><a href="#trimWhitespace" class="hash-link" aria-label="Direct link to trimWhitespace" title="Direct link to trimWhitespace">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L222"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">trimWhitespace</code><code>(</code><code>text<!-- -->: </code><code class="blue_P4bS">string</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
+<p>Trims leading and trailing whitespace from a string.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">trimWhitespace</span><span class="token punctuation">(</span><span class="token string">"  Hello, world!  "</span><span class="token punctuation">)</span> <span class="token comment">-- "Hello, world!"</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="trimLeadingWhitespace"><code style="text-decoration:none">trimLeadingWhitespace</code><a href="#trimLeadingWhitespace" class="hash-link" aria-label="Direct link to trimLeadingWhitespace" title="Direct link to trimLeadingWhitespace">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L240"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">trimLeadingWhitespace</code><code>(</code><code>text<!-- -->: </code><code class="blue_P4bS">string</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
+<p>Trims leading whitespace from a string.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">trimLeadingWhitespace</span><span class="token punctuation">(</span><span class="token string">"  Hello, world!"</span><span class="token punctuation">)</span> <span class="token comment">-- "Hello, world!"</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="trimTrailingWhitespace"><code style="text-decoration:none">trimTrailingWhitespace</code><a href="#trimTrailingWhitespace" class="hash-link" aria-label="Direct link to trimTrailingWhitespace" title="Direct link to trimTrailingWhitespace">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L258"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">trimTrailingWhitespace</code><code>(</code><code>text<!-- -->: </code><code class="blue_P4bS">string</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
+<p>Trims trailing whitespace from a string.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">trimTrailingWhitespace</span><span class="token punctuation">(</span><span class="token string">"Hello, world!  "</span><span class="token punctuation">)</span> <span class="token comment">-- "Hello, world!"</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="split"><code style="text-decoration:none">split</code><a href="#split" class="hash-link" aria-label="Direct link to split" title="Direct link to split">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L290"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">split</code><code>(</code><div class="inset_uKQm"><div><code>text<!-- -->: </code><code class="blue_P4bS">string</code><code class="op_lSLc"> | </code><code class="blue_P4bS">number?</code><code>,</code></div><div><code>delimiter<!-- -->: </code><code class="blue_P4bS">string?</code><code>,</code></div><div><code>trimTrailingDelimiter<!-- -->: </code><code class="blue_P4bS">boolean?</code><code>,</code></div><div><code>trim<!-- -->: </code><code class="blue_P4bS">boolean?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Trim whitespace from each chunk</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><code class="blue_P4bS">string</code><code class="purple_ieR2">}</code></div><div>
+<p>
+  Splits a string into a table of strings using a delimiter.
+  If <code>delimiter</code> is not provided, it defaults to a space.
+</p>
+<p>Setting <code>trimTrailingDelimiter</code> to <code>false</code> will result in an empty string at the end of the table if the text ends with the delimiter</p>
+<p>Setting <code>trim</code> to <code>false</code> will result in whitespace not being trimmed from each chunk</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"Hello, world!"</span><span class="token punctuation">)</span> <span class="token comment">-- { "Hello,", "world!" }</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"Hello, world!"</span><span class="token punctuation">,</span> <span class="token string">", "</span><span class="token punctuation">)</span> <span class="token comment">-- { "Hello", "world!" }</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"Hello, world!"</span><span class="token punctuation">,</span> <span class="token string">","</span><span class="token punctuation">,</span> <span class="token keyword">nil</span><span class="token punctuation">,</span> <span class="token keyword">false</span><span class="token punctuation">)</span> <span class="token comment">-- { "Hello", " world!" } -- no whitespace is trimmed</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"Hello, world!,"</span><span class="token punctuation">,</span> <span class="token string">","</span><span class="token punctuation">,</span> <span class="token keyword">false</span><span class="token punctuation">)</span> <span class="token comment">-- { "Hello", "world!", "" } -- trailing delimiter is included</span>
+
+TableUtil<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"path/to/file"</span><span class="token punctuation">,</span> <span class="token string">"/"</span><span class="token punctuation">)</span> <span class="token comment">-- { "path", "to", "file" }</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"path/to/file/"</span><span class="token punctuation">,</span> <span class="token string">"/"</span><span class="token punctuation">)</span> <span class="token comment">-- { "path", "to", "file" } -- trailing delimiter is trimmed</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="join"><code style="text-decoration:none">join</code><a href="#join" class="hash-link" aria-label="Direct link to join" title="Direct link to join">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L378"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">join</code><code>(</code><div class="inset_uKQm"><div><code>stringTable<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">string</code><code class="op_lSLc"> | </code><code class="blue_P4bS">number</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The table you want to join</p>
+</span></span></div><div><code>separator<!-- -->: </code><code class="blue_P4bS">string?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The separator to use when joining the table. Defaults to <code>","</code>.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">string</code></div><div>
+<p>
+  Joins an array of strings and numbers into a single string, with <code>separator</code>
+  between each element.
+</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">"Hello"</span><span class="token punctuation">,</span> <span class="token string">"world!"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">","</span><span class="token punctuation">)</span> <span class="token comment">-- "Hello,world!"</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">"Hello"</span><span class="token punctuation">,</span> <span class="token string">"world!"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">", "</span><span class="token punctuation">)</span> <span class="token comment">-- "Hello, world!"</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="extend"><code style="text-decoration:none">extend</code><a href="#extend" class="hash-link" aria-label="Direct link to extend" title="Direct link to extend">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L439"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">extend</code><code>(</code><div class="inset_uKQm"><div><code>arg1<!-- -->: </code><code class="blue_P4bS">boolean</code><code class="op_lSLc"> | </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The target table, or <code>true</code> for deep mode</p>
+</span></span></div><div><code>arg2<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The first table to merge in, or the target table in deep mode</p>
+</span></span></div><div><code>...<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><span class="inlineDescription_G7Er">-- <span>
+<p>The tables you want to merge into the target table</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code></div><div>
+<p>
+  Extends a table with one or more tables, in order, and returns it. The target
+  table is modified in place.
+</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> b <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> c <span class="token operator">=</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- { a = 1, b = 2, c = 3 }</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- { a = 3 } -- Last argument overwrites previous arguments</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">true</span><span class="token punctuation">)</span> <span class="token comment">-- Error: Argument #3 must be a table</span>
+</code></pre>
+<h4>Config override example:</h4>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> <span class="token keyword">function</span> <span class="token function">getDefaultConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">return</span> <span class="token punctuation">{</span>
+		health <span class="token operator">=</span> <span class="token number">100</span>
+	<span class="token punctuation">}</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">local</span> buffConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+	health <span class="token operator">=</span> <span class="token number">150</span><span class="token punctuation">,</span>
+	speed <span class="token operator">=</span> <span class="token number">1.5</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">local</span> playerConfig<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>any<span class="token punctuation">]</span><span class="token punctuation">:</span> any <span class="token punctuation">}</span> <span class="token operator">=</span> TableUtil<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token function">getDefaultConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> buffConfig<span class="token punctuation">)</span> <span class="token comment">-- { health = 150, speed = 1.5 }</span>
+</code></pre>
+<p>
+  Pass <code>true</code> as the first argument for deep mode, in which case the target table
+  is the second argument. Note that nested tables are currently assigned by
+  reference rather than merged key by key.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="assign"><code style="text-decoration:none">assign</code><a href="#assign" class="hash-link" aria-label="Direct link to assign" title="Direct link to assign">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L472"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">assign</code><code>(</code><div class="inset_uKQm"><div><code>targetTable<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The target table you want to assign values to</p>
+</span></span></div><div><code>...<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><span class="inlineDescription_G7Er">-- <span>
+<p>The tables you want to merge into the target table</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code></div><div>
+<p>The assign function copies all properties from one or more source objects to a target object.</p>
+<p>Alias for <code>TableUtil.extend</code>.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="treePath"><code style="text-decoration:none">treePath</code><a href="#treePath" class="hash-link" aria-label="Direct link to treePath" title="Direct link to treePath">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L493"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">treePath</code><code>(</code><div class="inset_uKQm"><div><code>tree<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The table or instance you want to get the value from</p>
+</span></span></div><div><code>path<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The path to the value</p>
+</span></span></div><div><code>delimiter<!-- -->: </code><code class="blue_P4bS">string?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The delimiter to use when splitting the path</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">any</code></div><div>
+<p>Gets a value from a table or Instance using a path.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">treePath</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token punctuation">{</span> b <span class="token operator">=</span> <span class="token punctuation">{</span> c <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"a.b.c"</span><span class="token punctuation">)</span> <span class="token comment">-- 1</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">treePath</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token punctuation">{</span> b <span class="token operator">=</span> <span class="token punctuation">{</span> c <span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"a.b"</span><span class="token punctuation">)</span> <span class="token comment">-- { c = 1 }</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">treePath</span><span class="token punctuation">(</span>game<span class="token punctuation">.</span>Workspace<span class="token punctuation">,</span> <span class="token string">"House.Door"</span><span class="token punctuation">)</span> <span class="token comment">-- Door instance</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">treePath</span><span class="token punctuation">(</span>script<span class="token punctuation">,</span> <span class="token string">"NonexistantChild"</span><span class="token punctuation">)</span> <span class="token comment">-- nil</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="insertIf"><code style="text-decoration:none">insertIf</code><a href="#insertIf" class="hash-link" aria-label="Direct link to insertIf" title="Direct link to insertIf">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L543"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">insertIf</code><code>(</code><div class="inset_uKQm"><div><code>target<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The table you want to insert the value into</p>
+</span></span></div><div><code>value<!-- -->: </code><code class="blue_P4bS">any</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The value you want to insert</p>
+</span></span></div><div><code>condition<!-- -->: </code><code class="blue_P4bS">nil</code><code class="op_lSLc"> | </code><code class="blue_P4bS">boolean</code><code class="op_lSLc"> | </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="blue_P4bS">boolean?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The test condition</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">nil</code></div><div>
+<p>Inserts a value into a table if the test condition is true.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">insertIf</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token keyword">true</span><span class="token punctuation">)</span> <span class="token comment">-- { 1, 2, 3, 4 }</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">insertIf</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token keyword">false</span><span class="token punctuation">)</span> <span class="token comment">-- { 1, 2, 3 }</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">insertIf</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">return</span> <span class="token keyword">true</span>
+<span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token comment">-- { 1, 2, 3, 4 }</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="instanceChildrenToTable"><code style="text-decoration:none">instanceChildrenToTable</code><a href="#instanceChildrenToTable" class="hash-link" aria-label="Direct link to instanceChildrenToTable" title="Direct link to instanceChildrenToTable">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L573"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">instanceChildrenToTable</code><code>(</code><div class="inset_uKQm"><div><code>instance<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>The instance you want to collect children from</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">string</code><code>]</code></span><code>: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="purple_ieR2">}</code></div><div>
+<p>Collects all children of an instance into a table.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">instanceChildrenToTable</span><span class="token punctuation">(</span>game<span class="token punctuation">.</span>Workspace<span class="token punctuation">)</span> <span class="token comment">-- { Part = Instance, Part2 = Instance }</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">instanceChildrenToTable</span><span class="token punctuation">(</span>game<span class="token punctuation">.</span>ReplicatedStorage<span class="token punctuation">.</span>Config<span class="token punctuation">)</span> <span class="token comment">-- { Config1 = CFrameValue, Config2 = StringValue }</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="tableLength"><code style="text-decoration:none">tableLength</code><a href="#tableLength" class="hash-link" aria-label="Direct link to tableLength" title="Direct link to tableLength">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L598"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">tableLength</code><code>(</code><code>source<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>Returns the total amount of values in a table.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">tableLength</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- 3</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">tableLength</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- 3</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="tableRandomIndex"><code style="text-decoration:none">tableRandomIndex</code><a href="#tableRandomIndex" class="hash-link" aria-label="Direct link to tableRandomIndex" title="Direct link to tableRandomIndex">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L623"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">tableRandomIndex</code><code>(</code><div class="inset_uKQm"><div><code>obj<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>The table or instance you want to get a random index from</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">any</code></div><div>
+<p>Returns a random index from a table or instance.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">tableRandomIndex</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- 2</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">tableRandomIndex</span><span class="token punctuation">(</span><span class="token punctuation">{</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- "b"</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="indexOf"><code style="text-decoration:none">indexOf</code><a href="#indexOf" class="hash-link" aria-label="Direct link to indexOf" title="Direct link to indexOf">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L651"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">indexOf</code><code>(</code><div class="inset_uKQm"><div><code>obj<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code>,</code></div><div><code>value<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code class="blue_P4bS">any</code></div><div>
+<p>Returns the key of the first value equal to <code>value</code>, or 0 if there is none.</p>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">)</span> <span class="token comment">-- 2</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"z"</span><span class="token punctuation">)</span> <span class="token comment">-- 0</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="tableRandom"><code style="text-decoration:none">tableRandom</code><a href="#tableRandom" class="hash-link" aria-label="Direct link to tableRandom" title="Direct link to tableRandom">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L676"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">tableRandom</code><code>(</code><div class="inset_uKQm"><div><code>obj<!-- -->: </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">any</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>The table or Instance to select from.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">any</code><span class="inlineDescription_G7Er">-- <span>
+<p>nil if the table is empty.</p>
+</span></span></div><div>
+<p>Returns a random value from a table, or a random child of an Instance.</p>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">tableRandom</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- "b"</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">tableRandom</span><span class="token punctuation">(</span><span class="token punctuation">{</span> x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- 2</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="makeConfigFromValues"><code style="text-decoration:none">makeConfigFromValues</code><a href="#makeConfigFromValues" class="hash-link" aria-label="Direct link to makeConfigFromValues" title="Direct link to makeConfigFromValues">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L710"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">makeConfigFromValues</code><code>(</code><div class="inset_uKQm"><div><code>folder<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Folder" target="_blank" rel="noopener noreferrer">Folder<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/Configuration" target="_blank" rel="noopener noreferrer">Configuration<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>The folder or Configuration you want to make a table from</p>
+</span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><span><code>[</code><code class="blue_P4bS">string</code><code>]</code></span><code>: </code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code></div><div>
+<p>Creates a nested table of value instances from a Folder or Configuration instance.</p>
+<h4>Example:</h4>
+<ul>
+  <li>Config (Folder) -- in ReplicatedStorage
+    <ul>
+      <li>Origin (CFrameValue), Value = CFrame.new(0, 1, 0)</li>
+      <li>WelcomeMessage (StringValue), Value = "Hello, world!"</li>
+    </ul>
+  </li>
+</ul>
+<pre class="language-lua"><code class="language-lua">TableUtil<span class="token punctuation">.</span><span class="token function">makeConfigFromValues</span><span class="token punctuation">(</span>game<span class="token punctuation">.</span>ReplicatedStorage<span class="token punctuation">.</span>Config<span class="token punctuation">)</span>
+</code></pre>
+<p>Result:</p>
+<pre class="language-lua"><code class="language-lua"><span class="token punctuation">{</span>
+	Origin <span class="token operator">=</span> CFrame<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+	WelcomeMessage <span class="token operator">=</span> <span class="token string">"Hello, world!"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="tableRemove"><code style="text-decoration:none">tableRemove</code><a href="#tableRemove" class="hash-link" aria-label="Direct link to tableRemove" title="Direct link to tableRemove">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/TableUtil.luau#L748"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>TableUtil<!-- -->.</code><code class="green_DgR4">tableRemove</code><code>(</code><div class="inset_uKQm"><div><code>obj<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The array you want to remove elements from</p>
+</span></span></div><div><code>removeTest<!-- -->: </code><code class="blue_P4bS">number</code><code class="op_lSLc"> | </code><code class="purple_ieR2">{</code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><span class="inlineDescription_G7Er">-- <span>
+<p>The index to remove, or a list of values to remove</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">nil</code></div><div>
+<p>Removes elements from an array in place, shifting the remaining elements down.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> list <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span> <span class="token punctuation">}</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">tableRemove</span><span class="token punctuation">(</span>list<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">-- list is now { "a", "c" }</span>
+
+<span class="token keyword">local</span> values <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token punctuation">}</span>
+TableUtil<span class="token punctuation">.</span><span class="token function">tableRemove</span><span class="token punctuation">(</span>values<span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- values is now { 1, 3 }</span>
+</code></pre>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;flip&quot;,
+            &quot;desc&quot;: &quot;Flips the table&#x27;s keys with its values.\nIf `mergeDuplicates` is `true`, All values will be stored in a table at the key&#x27;s index, instead of overwriting them.\n\n#### Example:\n```lua\nTableUtil.flip({ a = 1, b = 2 }) -- { [1] = \&quot;a\&quot;, [2] = \&quot;b\&quot; }\nTableUtil.flip({ a = 1, b = 2 }, true) -- { [1] = { \&quot;a\&quot; }, [2] = { \&quot;b\&quot; } }\n\n-- Use case: finding all keys with the same value\nlocal newTable = TableUtil.flip({ a = 1, b = 2, c = 2 }, true) -- { [1] = { \&quot;a\&quot; }, [2] = { \&quot;b\&quot;, \&quot;c\&quot; } }\nprint(#newTable[2]) -- 2\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;source&quot;,
+                    &quot;desc&quot;: &quot;The table you want to flip&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;mergeDuplicates&quot;,
+                    &quot;desc&quot;: &quot;Merge key duplicates into a table instead of overwriting them.&quot;,
+                    &quot;lua_type&quot;: &quot;boolean?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 44,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;map&quot;,
+            &quot;desc&quot;: &quot;Maps a table or instance to a new table.\n\n#### Example:\n```lua\nTableUtil.map({ 1, 2, 3 }, function(v)\n\treturn v * 2\nend) -- { 2, 4, 6 }\n\nTableUtil.map({ 1, 2, 3 }, function(v, i)\n\treturn i * 2\nend) -- { 2, 4, 6 }\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;source&quot;,
+                    &quot;desc&quot;: &quot;The table you want to map&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;callbackFn&quot;,
+                    &quot;desc&quot;: &quot;The function to map the table with&quot;,
+                    &quot;lua_type&quot;: &quot;(any, any, any) -&gt; (any, any)&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 89,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;filter&quot;,
+            &quot;desc&quot;: &quot;Filters a table, or an Instance&#x27;s children, into a new array.\n\n#### Example:\n```lua\nlocal noTwo = TableUtil.filter({ 1, 2, 3 }, function(value)\n\treturn value ~= 2\nend) -- { 1, 3 }\n\nlocal parts = TableUtil.filter(workspace, function(value)\n\treturn value:IsA(\&quot;Part\&quot;)\nend) -- { Part, Part2 }\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;source&quot;,
+                    &quot;desc&quot;: &quot;The table you want to filter&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any } | Instance&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;callbackFn&quot;,
+                    &quot;desc&quot;: &quot;The function to filter the table with (element, index, source). Keeps elements it returns exactly `true` for.&quot;,
+                    &quot;lua_type&quot;: &quot;(any, any, any) -&gt; (boolean?)&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ any }&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 139,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;mapIndex&quot;,
+            &quot;desc&quot;: &quot;Maps an array to a new table. The callback can return a new value, and optionally\na new key to store it under; otherwise each value keeps its position.\n\n#### Example:\n```lua\nTableUtil.mapIndex({ 1, 2, 3 }) -- { [1] = 1, [2] = 2, [3] = 3 }\n\nTableUtil.mapIndex({ 1, 2, 3 }, function(v)\n\treturn v * 2\nend) -- { [1] = 2, [2] = 4, [3] = 6 }\n\nTableUtil.mapIndex({ \&quot;a\&quot;, \&quot;b\&quot; }, function(v, i)\n\treturn i, v\nend) -- { a = 1, b = 2 }\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;source&quot;,
+                    &quot;desc&quot;: &quot;The array you want to map&quot;,
+                    &quot;lua_type&quot;: &quot;{ any }&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;filterFn&quot;,
+                    &quot;desc&quot;: &quot;Returns the new value and, optionally, the new key&quot;,
+                    &quot;lua_type&quot;: &quot;((value: any, index: number, source: { any }) -&gt; (any?, any?))?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 183,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;trimWhitespace&quot;,
+            &quot;desc&quot;: &quot;Trims leading and trailing whitespace from a string.\n\n#### Example:\n```lua\nTableUtil.trimWhitespace(\&quot;  Hello, world!  \&quot;) -- \&quot;Hello, world!\&quot;\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;text&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 222,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;trimLeadingWhitespace&quot;,
+            &quot;desc&quot;: &quot;Trims leading whitespace from a string.\n\n#### Example:\n```lua\nTableUtil.trimLeadingWhitespace(\&quot;  Hello, world!\&quot;) -- \&quot;Hello, world!\&quot;\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;text&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 240,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;trimTrailingWhitespace&quot;,
+            &quot;desc&quot;: &quot;Trims trailing whitespace from a string.\n\n#### Example:\n```lua\nTableUtil.trimTrailingWhitespace(\&quot;Hello, world!  \&quot;) -- \&quot;Hello, world!\&quot;\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;text&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 258,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;split&quot;,
+            &quot;desc&quot;: &quot;Splits a string into a table of strings using a delimiter.\nIf `delimiter` is not provided, it defaults to a space.\n\nSetting `trimTrailingDelimiter` to `false` will result in an empty string at the end of the table if the text ends with the delimiter\n\nSetting `trim` to `false` will result in whitespace not being trimmed from each chunk\n\n#### Example:\n```lua\nTableUtil.split(\&quot;Hello, world!\&quot;) -- { \&quot;Hello,\&quot;, \&quot;world!\&quot; }\nTableUtil.split(\&quot;Hello, world!\&quot;, \&quot;, \&quot;) -- { \&quot;Hello\&quot;, \&quot;world!\&quot; }\nTableUtil.split(\&quot;Hello, world!\&quot;, \&quot;,\&quot;, nil, false) -- { \&quot;Hello\&quot;, \&quot; world!\&quot; } -- no whitespace is trimmed\nTableUtil.split(\&quot;Hello, world!,\&quot;, \&quot;,\&quot;, false) -- { \&quot;Hello\&quot;, \&quot;world!\&quot;, \&quot;\&quot; } -- trailing delimiter is included\n\nTableUtil.split(\&quot;path/to/file\&quot;, \&quot;/\&quot;) -- { \&quot;path\&quot;, \&quot;to\&quot;, \&quot;file\&quot; }\nTableUtil.split(\&quot;path/to/file/\&quot;, \&quot;/\&quot;) -- { \&quot;path\&quot;, \&quot;to\&quot;, \&quot;file\&quot; } -- trailing delimiter is trimmed\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;text&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string | number?&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;delimiter&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string?&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;trimTrailingDelimiter&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;boolean?&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;trim&quot;,
+                    &quot;desc&quot;: &quot;Trim whitespace from each chunk&quot;,
+                    &quot;lua_type&quot;: &quot;boolean?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ string }&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 290,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;join&quot;,
+            &quot;desc&quot;: &quot;Joins an array of strings and numbers into a single string, with `separator`\nbetween each element.\n\n#### Example:\n```lua\nTableUtil.join({ \&quot;Hello\&quot;, \&quot;world!\&quot; }, \&quot;,\&quot;) -- \&quot;Hello,world!\&quot;\nTableUtil.join({ \&quot;Hello\&quot;, \&quot;world!\&quot; }, \&quot;, \&quot;) -- \&quot;Hello, world!\&quot;\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;stringTable&quot;,
+                    &quot;desc&quot;: &quot;The table you want to join&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: string | number }&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;separator&quot;,
+                    &quot;desc&quot;: &quot;The separator to use when joining the table. Defaults to `\&quot;,\&quot;`.&quot;,
+                    &quot;lua_type&quot;: &quot;string?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 378,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;extend&quot;,
+            &quot;desc&quot;: &quot;Extends a table with one or more tables, in order, and returns it. The target\ntable is modified in place.\n\n#### Example:\n```lua\nTableUtil.extend({ a = 1 }, { b = 2 }, { c = 3 }) -- { a = 1, b = 2, c = 3 }\nTableUtil.extend({ a = 1 }, { a = 2 }, { a = 3 }) -- { a = 3 } -- Last argument overwrites previous arguments\nTableUtil.extend({ a = 1 }, { a = 2 }, { a = 3 }, true) -- Error: Argument #3 must be a table\n```\n\n#### Config override example:\n```lua\nlocal function getDefaultConfig()\n\treturn {\n\t\thealth = 100\n\t}\nend\n\nlocal buffConfig = {\n\thealth = 150,\n\tspeed = 1.5\n}\n\nlocal playerConfig: { [any]: any } = TableUtil.extend(getDefaultConfig(), buffConfig) -- { health = 150, speed = 1.5 }\n```\n\nPass `true` as the first argument for deep mode, in which case the target table\nis the second argument. Note that nested tables are currently assigned by\nreference rather than merged key by key.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;arg1&quot;,
+                    &quot;desc&quot;: &quot;The target table, or `true` for deep mode&quot;,
+                    &quot;lua_type&quot;: &quot;boolean | { [any]: any }&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;arg2&quot;,
+                    &quot;desc&quot;: &quot;The first table to merge in, or the target table in deep mode&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;...&quot;,
+                    &quot;desc&quot;: &quot;The tables you want to merge into the target table&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 439,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;assign&quot;,
+            &quot;desc&quot;: &quot;The assign function copies all properties from one or more source objects to a target object.\n\nAlias for `TableUtil.extend`.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;targetTable&quot;,
+                    &quot;desc&quot;: &quot;The target table you want to assign values to&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;...&quot;,
+                    &quot;desc&quot;: &quot;The tables you want to merge into the target table&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 472,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;treePath&quot;,
+            &quot;desc&quot;: &quot;Gets a value from a table or Instance using a path.\n\n#### Example:\n```lua\nTableUtil.treePath({ a = { b = { c = 1 } } }, \&quot;a.b.c\&quot;) -- 1\nTableUtil.treePath({ a = { b = { c = 1 } } }, \&quot;a.b\&quot;) -- { c = 1 }\nTableUtil.treePath(game.Workspace, \&quot;House.Door\&quot;) -- Door instance\nTableUtil.treePath(script, \&quot;NonexistantChild\&quot;) -- nil\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;tree&quot;,
+                    &quot;desc&quot;: &quot;The table or instance you want to get the value from&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any } | Instance&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;path&quot;,
+                    &quot;desc&quot;: &quot;The path to the value&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;delimiter&quot;,
+                    &quot;desc&quot;: &quot;The delimiter to use when splitting the path&quot;,
+                    &quot;lua_type&quot;: &quot;string?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 493,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;insertIf&quot;,
+            &quot;desc&quot;: &quot;Inserts a value into a table if the test condition is true.\n\n#### Example:\n```lua\nTableUtil.insertIf({ 1, 2, 3 }, 4, true) -- { 1, 2, 3, 4 }\nTableUtil.insertIf({ 1, 2, 3 }, 4, false) -- { 1, 2, 3 }\nTableUtil.insertIf({ 1, 2, 3 }, 4, function()\n\treturn true\nend) -- { 1, 2, 3, 4 }\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;target&quot;,
+                    &quot;desc&quot;: &quot;The table you want to insert the value into&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The value you want to insert&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;condition&quot;,
+                    &quot;desc&quot;: &quot;The test condition&quot;,
+                    &quot;lua_type&quot;: &quot;nil | boolean | () -&gt; boolean?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;nil&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 543,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;instanceChildrenToTable&quot;,
+            &quot;desc&quot;: &quot;Collects all children of an instance into a table.\n\n#### Example:\n```lua\nTableUtil.instanceChildrenToTable(game.Workspace) -- { Part = Instance, Part2 = Instance }\nTableUtil.instanceChildrenToTable(game.ReplicatedStorage.Config) -- { Config1 = CFrameValue, Config2 = StringValue }\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;instance&quot;,
+                    &quot;desc&quot;: &quot;The instance you want to collect children from&quot;,
+                    &quot;lua_type&quot;: &quot;Instance&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ [string]: Instance }&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 573,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;tableLength&quot;,
+            &quot;desc&quot;: &quot;Returns the total amount of values in a table.\n\n#### Example:\n```lua\nTableUtil.tableLength({ 1, 2, 3 }) -- 3\nTableUtil.tableLength({ a = 1, b = 2, c = 3 }) -- 3\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;source&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 598,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;tableRandomIndex&quot;,
+            &quot;desc&quot;: &quot;Returns a random index from a table or instance.\n\n#### Example:\n```lua\nTableUtil.tableRandomIndex({ 1, 2, 3 }) -- 2\nTableUtil.tableRandomIndex({ a = 1, b = 2, c = 3 }) -- \&quot;b\&quot;\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;obj&quot;,
+                    &quot;desc&quot;: &quot;The table or instance you want to get a random index from&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any } | Instance&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 623,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;indexOf&quot;,
+            &quot;desc&quot;: &quot;Returns the key of the first value equal to `value`, or 0 if there is none.\n\n```lua\nTableUtil.indexOf({ \&quot;a\&quot;, \&quot;b\&quot;, \&quot;c\&quot; }, \&quot;b\&quot;) -- 2\nTableUtil.indexOf({ \&quot;a\&quot;, \&quot;b\&quot;, \&quot;c\&quot; }, \&quot;z\&quot;) -- 0\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;obj&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any }&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 651,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;tableRandom&quot;,
+            &quot;desc&quot;: &quot;Returns a random value from a table, or a random child of an Instance.\n\n```lua\nTableUtil.tableRandom({ \&quot;a\&quot;, \&quot;b\&quot;, \&quot;c\&quot; }) -- \&quot;b\&quot;\nTableUtil.tableRandom({ x = 1, y = 2 }) -- 2\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;obj&quot;,
+                    &quot;desc&quot;: &quot;The table or Instance to select from.&quot;,
+                    &quot;lua_type&quot;: &quot;{ [any]: any } | Instance&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;nil if the table is empty.&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 676,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;makeConfigFromValues&quot;,
+            &quot;desc&quot;: &quot;Creates a nested table of value instances from a Folder or Configuration instance.\n\n#### Example:\n\n- Config (Folder) -- in ReplicatedStorage\n  - Origin (CFrameValue), Value = CFrame.new(0, 1, 0)\n  - WelcomeMessage (StringValue), Value = \&quot;Hello, world!\&quot;\n\n```lua\nTableUtil.makeConfigFromValues(game.ReplicatedStorage.Config)\n```\n\nResult:\n```lua\n{\n\tOrigin = CFrame.new(0, 1, 0),\n\tWelcomeMessage = \&quot;Hello, world!\&quot;\n}\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;folder&quot;,
+                    &quot;desc&quot;: &quot;The folder or Configuration you want to make a table from&quot;,
+                    &quot;lua_type&quot;: &quot;Folder | Configuration&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ [string]: any }&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 710,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;tableRemove&quot;,
+            &quot;desc&quot;: &quot;Removes elements from an array in place, shifting the remaining elements down.\n\n#### Example:\n```lua\nlocal list = { \&quot;a\&quot;, \&quot;b\&quot;, \&quot;c\&quot; }\nTableUtil.tableRemove(list, 2) -- list is now { \&quot;a\&quot;, \&quot;c\&quot; }\n\nlocal values = { 1, 2, 3, 2 }\nTableUtil.tableRemove(values, { 2 }) -- values is now { 1, 3 }\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;obj&quot;,
+                    &quot;desc&quot;: &quot;The array you want to remove elements from&quot;,
+                    &quot;lua_type&quot;: &quot;{ any }&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;removeTest&quot;,
+                    &quot;desc&quot;: &quot;The index to remove, or a list of values to remove&quot;,
+                    &quot;lua_type&quot;: &quot;number | { any }&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;nil&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 748,
+                &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [],
+    &quot;types&quot;: [],
+    &quot;name&quot;: &quot;TableUtil&quot;,
+    &quot;desc&quot;: &quot;Table and string helpers: flipping, mapping, filtering and merging tables, reading\npaths through nested tables or Instances, splitting and joining strings, and\nrandom picks.&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 9,
+        &quot;path&quot;: &quot;src/TableUtil.luau&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#assign" class="table-of-contents__link toc-highlight">.assign</a></li><li><a href="#extend" class="table-of-contents__link toc-highlight">.extend</a></li><li><a href="#filter" class="table-of-contents__link toc-highlight">.filter</a></li><li><a href="#flip" class="table-of-contents__link toc-highlight">.flip</a></li><li><a href="#indexOf" class="table-of-contents__link toc-highlight">.indexOf</a></li><li><a href="#insertIf" class="table-of-contents__link toc-highlight">.insertIf</a></li><li><a href="#instanceChildrenToTable" class="table-of-contents__link toc-highlight">.instanceChildrenToTable</a></li><li><a href="#join" class="table-of-contents__link toc-highlight">.join</a></li><li><a href="#makeConfigFromValues" class="table-of-contents__link toc-highlight">.makeConfigFromValues</a></li><li><a href="#map" class="table-of-contents__link toc-highlight">.map</a></li><li><a href="#mapIndex" class="table-of-contents__link toc-highlight">.mapIndex</a></li><li><a href="#split" class="table-of-contents__link toc-highlight">.split</a></li><li><a href="#tableLength" class="table-of-contents__link toc-highlight">.tableLength</a></li><li><a href="#tableRandom" class="table-of-contents__link toc-highlight">.tableRandom</a></li><li><a href="#tableRandomIndex" class="table-of-contents__link toc-highlight">.tableRandomIndex</a></li><li><a href="#tableRemove" class="table-of-contents__link toc-highlight">.tableRemove</a></li><li><a href="#treePath" class="table-of-contents__link toc-highlight">.treePath</a></li><li><a href="#trimLeadingWhitespace" class="table-of-contents__link toc-highlight">.trimLeadingWhitespace</a></li><li><a href="#trimTrailingWhitespace" class="table-of-contents__link toc-highlight">.trimTrailingWhitespace</a></li><li><a href="#trimWhitespace" class="table-of-contents__link toc-highlight">.trimWhitespace</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Breezy1214. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

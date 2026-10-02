@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="plugin-moonwave plugin-id-moonwave" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">MathUtil | EZUtil</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://Breezy1214.github.io/EZUtil/api/MathUtil"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="MathUtil | EZUtil"><meta data-rh="true" name="description" content="Number helpers: interpolation, rounding, formatting and abbreviating numbers,
+random values, and positions on parts."><meta data-rh="true" property="og:description" content="Number helpers: interpolation, rounding, formatting and abbreviating numbers,
+random values, and positions on parts."><link data-rh="true" rel="canonical" href="https://Breezy1214.github.io/EZUtil/api/MathUtil"><link data-rh="true" rel="alternate" href="https://Breezy1214.github.io/EZUtil/api/MathUtil" hreflang="en"><link data-rh="true" rel="alternate" href="https://Breezy1214.github.io/EZUtil/api/MathUtil" hreflang="x-default"><link rel="stylesheet" href="/EZUtil/assets/css/styles.b9f2c64d.css">
+<script src="/EZUtil/assets/js/runtime~main.fd89ad75.js" defer="defer"></script>
+<script src="/EZUtil/assets/js/main.4106c634.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/EZUtil/"><b class="navbar__title text--truncate">EZUtil</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/EZUtil/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/Breezy1214/EZUtil" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/EZUtil">​E​Z​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/AimIndicator">​Aim​Indicator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/CharacterRigUtil">​Character​Rig​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/DateUtil">​Date​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/FixedRewardSequence">​Fixed​Reward​Sequence</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/GroundUtil">​Ground​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/InstanceUtil">​Instance​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/JanitorUtil">​Janitor​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/LayoutUtil">​Layout​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/EZUtil/api/MathUtil">​Math​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/ParticleUtil">​Particle​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/PlayerUtil">​Player​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/ProfileUtil">​Profile​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/ProjectileUtil">​Projectile​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/SearchUtil">​Search​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/SystemUtil">​System​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/TableDiffUtil">​Table​Diff​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/TableUtil">​Table​Util</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/EZUtil/api/VfxUtil">​Vfx​Util</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">Math</span><span style="display:inline-block">Util</span></h1><div class="luaClassTags_EipM"></div><div>
+<p>
+  Number helpers: interpolation, rounding, formatting and abbreviating numbers,
+  random values, and positions on parts.
+</p>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="lerp"><code style="text-decoration:none">lerp</code><a href="#lerp" class="hash-link" aria-label="Direct link to lerp" title="Direct link to lerp">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L26"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">lerp</code><code>(</code><div class="inset_uKQm"><div><code>start<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>stop<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>alpha<!-- -->: </code><code class="blue_P4bS">number</code></div></div><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>Interpolates between two numbers.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">MathUtil<span class="token punctuation">.</span><span class="token function">lerp</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">.5</span><span class="token punctuation">)</span> <span class="token comment">-- 5</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">lerp</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">-- 10</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="round"><code style="text-decoration:none">round</code><a href="#round" class="hash-link" aria-label="Direct link to round" title="Direct link to round">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L43"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">round</code><code>(</code><code>_number<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>Rounds a number to the nearest integer.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">MathUtil<span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span><span class="token number">1.5</span><span class="token punctuation">)</span> <span class="token comment">-- 2</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span><span class="token number">1.4</span><span class="token punctuation">)</span> <span class="token comment">-- 1</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="formatInt"><code style="text-decoration:none">formatInt</code><a href="#formatInt" class="hash-link" aria-label="Direct link to formatInt" title="Direct link to formatInt">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L65"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">formatInt</code><code>(</code><div class="inset_uKQm"><div><code>number<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>decimals<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The number of decimal places to round to. Defaults to 2.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">string</code></div><div>
+<p>Formats a number to have commas.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">MathUtil<span class="token punctuation">.</span><span class="token function">formatInt</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span> <span class="token comment">-- 1,000</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">formatInt</span><span class="token punctuation">(</span><span class="token number">1000.01</span><span class="token punctuation">)</span> <span class="token comment">-- 1,000.01</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="random"><code style="text-decoration:none">random</code><a href="#random" class="hash-link" aria-label="Direct link to random" title="Direct link to random">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L109"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">random</code><code>(</code><div class="inset_uKQm"><div><code>minValue<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The minimum, or the maximum when <code>maxValue</code> is nil.</p>
+</span></span></div><div><code>maxValue<!-- -->: </code><code class="blue_P4bS">number?</code><code>,</code></div><div><code>float<!-- -->: </code><code class="blue_P4bS">boolean?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Whether to return as a float or not. Defaults to false.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>
+  Returns a random integer between two numbers (inclusive), or a float when <code>float</code>
+  is true.
+</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">MathUtil<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment">-- 5</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token keyword">true</span><span class="token punctuation">)</span> <span class="token comment">-- 5.5</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment">-- 5 (min defaults to 1)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="randomRange"><code style="text-decoration:none">randomRange</code><a href="#randomRange" class="hash-link" aria-label="Direct link to randomRange" title="Direct link to randomRange">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L132"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">randomRange</code><code>(</code><div class="inset_uKQm"><div><code>minValue<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>maxValue<!-- -->: </code><code class="blue_P4bS">number</code></div></div><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>
+  Returns a random float between <code>minValue</code> and <code>maxValue</code>, using a shared Random
+  object.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="randomString"><code style="text-decoration:none">randomString</code><a href="#randomString" class="hash-link" aria-label="Direct link to randomString" title="Direct link to randomString">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L152"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">randomString</code><code>(</code><div class="inset_uKQm"><div><code>length<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The length of the string. Defaults to 18.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">string</code></div><div>
+<p>Returns a random string of letters and digits.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">MathUtil<span class="token punctuation">.</span><span class="token function">randomString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">-- "aB3dE9gH1jK0mN4pQr"</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">randomString</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment">-- "aB3dE9gH1j"</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="randomObj"><code style="text-decoration:none">randomObj</code><a href="#randomObj" class="hash-link" aria-label="Direct link to randomObj" title="Direct link to randomObj">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L178"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">randomObj</code><code>(</code><code>obj<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">any</code><code class="purple_ieR2">}</code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code class="blue_P4bS">any</code></div><div>
+<p>Returns a random element of an array, or a random child of an Instance.</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">MathUtil<span class="token punctuation">.</span><span class="token function">randomObj</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">-- "b"</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">randomObj</span><span class="token punctuation">(</span>workspace<span class="token punctuation">.</span>Map<span class="token punctuation">.</span>SpawnPoints<span class="token punctuation">)</span> <span class="token comment">-- SpawnPoint3</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="shortenNumber"><code style="text-decoration:none">shortenNumber</code><a href="#shortenNumber" class="hash-link" aria-label="Direct link to shortenNumber" title="Direct link to shortenNumber">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L235"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">shortenNumber</code><code>(</code><div class="inset_uKQm"><div><code>number<!-- -->: </code><code class="blue_P4bS">number</code><code class="op_lSLc"> | </code><code class="blue_P4bS">string</code><code>,</code></div><div><code>minimumTiers<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The minimum number of tiers to shorten. Defaults to 1.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS">string</code></div><div>
+<p>
+  Shortens a large number to a readable format.
+  Useful for displaying large numbers that don't require exact precision.
+  Common use cases are for displaying XP, money in leaderboards, damage etc.
+</p>
+<p>
+  Shortened numbers keep one decimal place, truncated rather than rounded, so a value never
+  reads as more than it is: 999,999 shortens to 999.9K instead of rolling up to 1,000K.
+</p>
+<h4>Example:</h4>
+<pre class="language-lua"><code class="language-lua">MathUtil<span class="token punctuation">.</span><span class="token function">shortenNumber</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span> <span class="token comment">-- 1K</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">shortenNumber</span><span class="token punctuation">(</span><span class="token number">1200</span><span class="token punctuation">)</span> <span class="token comment">-- 1.2K</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">shortenNumber</span><span class="token punctuation">(</span><span class="token number">999999</span><span class="token punctuation">)</span> <span class="token comment">-- 999.9K</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">shortenNumber</span><span class="token punctuation">(</span><span class="token number">1000000</span><span class="token punctuation">)</span> <span class="token comment">-- 1M</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">shortenNumber</span><span class="token punctuation">(</span><span class="token number">1000000000</span><span class="token punctuation">)</span> <span class="token comment">-- 1B</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">shortenNumber</span><span class="token punctuation">(</span><span class="token number">1000000000000</span><span class="token punctuation">)</span> <span class="token comment">-- 1T</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">shortenNumber</span><span class="token punctuation">(</span><span class="token number">1000000000000000</span><span class="token punctuation">)</span> <span class="token comment">-- 1Q</span>
+</code></pre>
+<p>
+  minimumTiers is useful for when you want to shorten a number but only if it's at least a certain tier.
+  For example, to only shorten numbers of 1,000,000 or more:
+</p>
+<pre class="language-lua"><code class="language-lua">MathUtil<span class="token punctuation">.</span><span class="token function">shortenNumber</span><span class="token punctuation">(</span><span class="token number">250000</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">-- 250,000</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">shortenNumber</span><span class="token punctuation">(</span><span class="token number">1000000</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">-- 1M</span>
+</code></pre>
+<p>A tier is the amount of commas in a number. For example, 1,000,000 has 2 tiers and 1,000 has 1 tier.</p>
+<p>Tier list and their abbreviations:</p>
+<ul>
+  <li>1,000 = K</li>
+  <li>1,000,000 = M</li>
+  <li>1,000,000,000 = B</li>
+  <li>1,000,000,000,000 = T</li>
+  <li>1,000,000,000,000,000 = Q</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getVector3"><code style="text-decoration:none">getVector3</code><a href="#getVector3" class="hash-link" aria-label="Direct link to getVector3" title="Direct link to getVector3">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L283"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">getVector3</code><code>(</code><code>object<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/CFrame" target="_blank" rel="noopener noreferrer">CFrame<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div><div>
+<p>Gets a Vector3 from an object containing a Vector3 or CFrame.</p>
+<h4>Supports:</h4>
+<ul>
+  <li>Vector3</li>
+  <li>CFrame</li>
+  <li>Attachment</li>
+  <li>BasePart</li>
+  <li>CFrameValue</li>
+  <li>Vector3Value</li>
+  <li>Camera</li>
+</ul>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getDistance"><code style="text-decoration:none">getDistance</code><a href="#getDistance" class="hash-link" aria-label="Direct link to getDistance" title="Direct link to getDistance">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L305"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">getDistance</code><code>(</code><div class="inset_uKQm"><div><code>origin<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/CFrame" target="_blank" rel="noopener noreferrer">CFrame<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>target<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/CFrame" target="_blank" rel="noopener noreferrer">CFrame<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div></div><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>
+  Gets the distance between two positions. Accepts anything <a href="/EZUtil/api/MathUtil#getVector3">MathUtil.getVector3</a>
+  supports, and errors if either value has no position.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getPartBottomSurface"><code style="text-decoration:none">getPartBottomSurface</code><a href="#getPartBottomSurface" class="hash-link" aria-label="Direct link to getPartBottomSurface" title="Direct link to getPartBottomSurface">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L329"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">getPartBottomSurface</code><code>(</code><code>part<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/BasePart" target="_blank" rel="noopener noreferrer">BasePart<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/CFrame" target="_blank" rel="noopener noreferrer">CFrame<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div><div>
+<p>
+  Returns the CFrame at the centre of a part's bottom face, keeping the part's
+  rotation.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="randomInDisc"><code style="text-decoration:none">randomInDisc</code><a href="#randomInDisc" class="hash-link" aria-label="Direct link to randomInDisc" title="Direct link to randomInDisc">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L345"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">randomInDisc</code><code>(</code><code>radius<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div><div>
+<p>
+  Returns a random flat offset (Y = 0) inside a disc of the given radius. Points are
+  spread evenly over the disc's area rather than bunched at its centre.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> spawnPosition <span class="token operator">=</span> center <span class="token operator">+</span> MathUtil<span class="token punctuation">.</span><span class="token function">randomInDisc</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="getRandomInPart"><code style="text-decoration:none">getRandomInPart</code><a href="#getRandomInPart" class="hash-link" aria-label="Direct link to getRandomInPart" title="Direct link to getRandomInPart">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L360"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">getRandomInPart</code><code>(</code><code>part<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/BasePart" target="_blank" rel="noopener noreferrer">BasePart<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/CFrame" target="_blank" rel="noopener noreferrer">CFrame<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div><div>
+<p>
+  Returns a random CFrame across the part's X and Z extents, at the height of the
+  part's centre and with the part's rotation.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="roundNumber"><code style="text-decoration:none">roundNumber</code><a href="#roundNumber" class="hash-link" aria-label="Direct link to roundNumber" title="Direct link to roundNumber">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L384"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">roundNumber</code><code>(</code><div class="inset_uKQm"><div><code>num<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>numPlaces<!-- -->: </code><code class="blue_P4bS">number</code></div></div><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>Rounds <code>num</code> to the nearest value with <code>numPlaces</code> decimal places.</p>
+<pre class="language-lua"><code class="language-lua">MathUtil<span class="token punctuation">.</span><span class="token function">roundNumber</span><span class="token punctuation">(</span><span class="token number">1.236</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">-- 1.24</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">roundNumber</span><span class="token punctuation">(</span><span class="token number">1.231</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">-- 1.23</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="isNumberSecure"><code style="text-decoration:none">isNumberSecure</code><a href="#isNumberSecure" class="hash-link" aria-label="Direct link to isNumberSecure" title="Direct link to isNumberSecure">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/Breezy1214/EZUtil/blob/main/src/MathUtil.luau#L403"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>MathUtil<!-- -->.</code><code class="green_DgR4">isNumberSecure</code><code>(</code><code>number<!-- -->: </code><code class="blue_P4bS">any</code><code>) → </code><code class="blue_P4bS">boolean</code></div><div>
+<p>
+  Returns true only when <code>number</code> is a number and not negative. Useful for
+  validating amounts sent by clients.
+</p>
+<pre class="language-lua"><code class="language-lua">MathUtil<span class="token punctuation">.</span><span class="token function">isNumberSecure</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token comment">-- true</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">isNumberSecure</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token comment">-- false</span>
+MathUtil<span class="token punctuation">.</span><span class="token function">isNumberSecure</span><span class="token punctuation">(</span><span class="token string">"5"</span><span class="token punctuation">)</span> <span class="token comment">-- false</span>
+</code></pre>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;lerp&quot;,
+            &quot;desc&quot;: &quot;Interpolates between two numbers.\n\n#### Example:\n```lua\nMathUtil.lerp(0, 10, .5) -- 5\nMathUtil.lerp(0, 10, 1) -- 10\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;start&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;stop&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;alpha&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 26,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;round&quot;,
+            &quot;desc&quot;: &quot;Rounds a number to the nearest integer.\n\n#### Example:\n```lua\nMathUtil.round(1.5) -- 2\nMathUtil.round(1.4) -- 1\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;_number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 43,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;formatInt&quot;,
+            &quot;desc&quot;: &quot;Formats a number to have commas.\n\n#### Example:\n```lua\nMathUtil.formatInt(1000) -- 1,000\nMathUtil.formatInt(1000.01) -- 1,000.01\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;decimals&quot;,
+                    &quot;desc&quot;: &quot;The number of decimal places to round to. Defaults to 2.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 65,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;random&quot;,
+            &quot;desc&quot;: &quot;Returns a random integer between two numbers (inclusive), or a float when `float`\nis true.\n\n#### Example:\n```lua\nMathUtil.random(1, 10) -- 5\nMathUtil.random(1, 10, true) -- 5.5\nMathUtil.random(10) -- 5 (min defaults to 1)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;minValue&quot;,
+                    &quot;desc&quot;: &quot;The minimum, or the maximum when `maxValue` is nil.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;maxValue&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;float&quot;,
+                    &quot;desc&quot;: &quot;Whether to return as a float or not. Defaults to false.&quot;,
+                    &quot;lua_type&quot;: &quot;boolean?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 109,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;randomRange&quot;,
+            &quot;desc&quot;: &quot;Returns a random float between `minValue` and `maxValue`, using a shared Random\nobject.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;minValue&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;maxValue&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 132,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;randomString&quot;,
+            &quot;desc&quot;: &quot;Returns a random string of letters and digits.\n\n#### Example:\n```lua\nMathUtil.randomString() -- \&quot;aB3dE9gH1jK0mN4pQr\&quot;\nMathUtil.randomString(10) -- \&quot;aB3dE9gH1j\&quot;\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;length&quot;,
+                    &quot;desc&quot;: &quot;The length of the string. Defaults to 18.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 152,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;randomObj&quot;,
+            &quot;desc&quot;: &quot;Returns a random element of an array, or a random child of an Instance.\n\n#### Example:\n```lua\nMathUtil.randomObj({ \&quot;a\&quot;, \&quot;b\&quot;, \&quot;c\&quot; }) -- \&quot;b\&quot;\nMathUtil.randomObj(workspace.Map.SpawnPoints) -- SpawnPoint3\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;obj&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;{ any } | Instance&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 178,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;shortenNumber&quot;,
+            &quot;desc&quot;: &quot;Shortens a large number to a readable format.\nUseful for displaying large numbers that don&#x27;t require exact precision.\nCommon use cases are for displaying XP, money in leaderboards, damage etc.\n\nShortened numbers keep one decimal place, truncated rather than rounded, so a value never\nreads as more than it is: 999,999 shortens to 999.9K instead of rolling up to 1,000K.\n\n#### Example:\n```lua\nMathUtil.shortenNumber(1000) -- 1K\nMathUtil.shortenNumber(1200) -- 1.2K\nMathUtil.shortenNumber(999999) -- 999.9K\nMathUtil.shortenNumber(1000000) -- 1M\nMathUtil.shortenNumber(1000000000) -- 1B\nMathUtil.shortenNumber(1000000000000) -- 1T\nMathUtil.shortenNumber(1000000000000000) -- 1Q\n```\n\nminimumTiers is useful for when you want to shorten a number but only if it&#x27;s at least a certain tier.\nFor example, to only shorten numbers of 1,000,000 or more:\n```lua\nMathUtil.shortenNumber(250000, 2) -- 250,000\nMathUtil.shortenNumber(1000000, 2) -- 1M\n```\n\nA tier is the amount of commas in a number. For example, 1,000,000 has 2 tiers and 1,000 has 1 tier.\n\nTier list and their abbreviations:\n- 1,000 = K\n- 1,000,000 = M\n- 1,000,000,000 = B\n- 1,000,000,000,000 = T\n- 1,000,000,000,000,000 = Q&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number | string&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;minimumTiers&quot;,
+                    &quot;desc&quot;: &quot;The minimum number of tiers to shorten. Defaults to 1.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 235,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getVector3&quot;,
+            &quot;desc&quot;: &quot;Gets a Vector3 from an object containing a Vector3 or CFrame.\n\n#### Supports:\n- Vector3\n- CFrame\n- Attachment\n- BasePart\n- CFrameValue\n- Vector3Value\n- Camera&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;object&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3 | CFrame | Instance&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3?&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 283,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getDistance&quot;,
+            &quot;desc&quot;: &quot;Gets the distance between two positions. Accepts anything [MathUtil.getVector3]\nsupports, and errors if either value has no position.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;origin&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3 | CFrame | Instance&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;target&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3 | CFrame | Instance&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 305,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getPartBottomSurface&quot;,
+            &quot;desc&quot;: &quot;Returns the CFrame at the centre of a part&#x27;s bottom face, keeping the part&#x27;s\nrotation.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;part&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;BasePart&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;CFrame&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 329,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;randomInDisc&quot;,
+            &quot;desc&quot;: &quot;Returns a random flat offset (Y = 0) inside a disc of the given radius. Points are\nspread evenly over the disc&#x27;s area rather than bunched at its centre.\n\n```lua\nlocal spawnPosition = center + MathUtil.randomInDisc(20)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;radius&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector3&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 345,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;getRandomInPart&quot;,
+            &quot;desc&quot;: &quot;Returns a random CFrame across the part&#x27;s X and Z extents, at the height of the\npart&#x27;s centre and with the part&#x27;s rotation.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;part&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;BasePart&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;CFrame&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 360,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;roundNumber&quot;,
+            &quot;desc&quot;: &quot;Rounds `num` to the nearest value with `numPlaces` decimal places.\n\n```lua\nMathUtil.roundNumber(1.236, 2) -- 1.24\nMathUtil.roundNumber(1.231, 2) -- 1.23\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;num&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;numPlaces&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 384,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;isNumberSecure&quot;,
+            &quot;desc&quot;: &quot;Returns true only when `number` is a number and not negative. Useful for\nvalidating amounts sent by clients.\n\n```lua\nMathUtil.isNumberSecure(5) -- true\nMathUtil.isNumberSecure(-5) -- false\nMathUtil.isNumberSecure(\&quot;5\&quot;) -- false\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;number&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;boolean&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 403,
+                &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [],
+    &quot;types&quot;: [],
+    &quot;name&quot;: &quot;MathUtil&quot;,
+    &quot;desc&quot;: &quot;Number helpers: interpolation, rounding, formatting and abbreviating numbers,\nrandom values, and positions on parts.&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 8,
+        &quot;path&quot;: &quot;src/MathUtil.luau&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#formatInt" class="table-of-contents__link toc-highlight">.formatInt</a></li><li><a href="#getDistance" class="table-of-contents__link toc-highlight">.getDistance</a></li><li><a href="#getPartBottomSurface" class="table-of-contents__link toc-highlight">.getPartBottomSurface</a></li><li><a href="#getRandomInPart" class="table-of-contents__link toc-highlight">.getRandomInPart</a></li><li><a href="#getVector3" class="table-of-contents__link toc-highlight">.getVector3</a></li><li><a href="#isNumberSecure" class="table-of-contents__link toc-highlight">.isNumberSecure</a></li><li><a href="#lerp" class="table-of-contents__link toc-highlight">.lerp</a></li><li><a href="#random" class="table-of-contents__link toc-highlight">.random</a></li><li><a href="#randomInDisc" class="table-of-contents__link toc-highlight">.randomInDisc</a></li><li><a href="#randomObj" class="table-of-contents__link toc-highlight">.randomObj</a></li><li><a href="#randomRange" class="table-of-contents__link toc-highlight">.randomRange</a></li><li><a href="#randomString" class="table-of-contents__link toc-highlight">.randomString</a></li><li><a href="#round" class="table-of-contents__link toc-highlight">.round</a></li><li><a href="#roundNumber" class="table-of-contents__link toc-highlight">.roundNumber</a></li><li><a href="#shortenNumber" class="table-of-contents__link toc-highlight">.shortenNumber</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Breezy1214. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
