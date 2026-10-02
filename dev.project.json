@@ -1,0 +1,15 @@
+{
+  "name": "EZUtil-Dev",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "Packages": {
+        "EZUtil": {
+          "$path": "src"
+        },
+        "$path": "Packages"
+      }
+    }
+  }
+}

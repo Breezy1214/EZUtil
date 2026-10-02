@@ -1,0 +1,20 @@
+[package]
+name = "breezy1214/ezutil"
+description = "Reusable, game-agnostic Roblox utilities: tables, math, dates, instances, players, layout, projectiles, particles and more."
+version = "0.1.0"
+license = "MIT"
+realm = "shared"
+registry = "https://github.com/UpliftGames/wally-index"
+exclude = [
+	"Packages",
+	"dev.project.json",
+	"moonwave.toml",
+	"sourcemap.json",
+	"rokit.toml",
+	"selene.toml",
+	"stylua.toml",
+]
+
+[dependencies]
+Janitor = "howmanysmall/janitor@1.18.3"
+Promise = "evaera/promise@4.0.0"

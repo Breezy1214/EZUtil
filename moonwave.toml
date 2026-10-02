@@ -1,0 +1,25 @@
+title = "EZUtil"
+gitRepoUrl = "https://github.com/Breezy1214/EZUtil"
+gitSourceBranch = "main"
+
+classOrder = [
+	"EZUtil",
+	"AimIndicator",
+	"CharacterRigUtil",
+	"DateUtil",
+	"FixedRewardSequence",
+	"GroundUtil",
+	"InstanceUtil",
+	"JanitorUtil",
+	"LayoutUtil",
+	"MathUtil",
+	"ParticleUtil",
+	"PlayerUtil",
+	"ProfileUtil",
+	"ProjectileUtil",
+	"SearchUtil",
+	"SystemUtil",
+	"TableDiffUtil",
+	"TableUtil",
+	"VfxUtil",
+]
