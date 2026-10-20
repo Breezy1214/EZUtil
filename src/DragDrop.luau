@@ -3,17 +3,9 @@
 	@class DragDrop
 	@client
 
-	A UI drag-and-drop controller. Sources are GuiObjects that get a `UIDragDetector`;
-	targets are GuiObjects that a drag can be released on. Each controller owns its
-	sources and targets, runs at most one drag at a time, and reports everything
-	through callbacks, so the game decides what a drop means.
+	A UI drag-and-drop controller. Sources are GuiObjects that get a `UIDragDetector`; targets are GuiObjects that a drag can be released on. Each controller owns its sources and targets, runs at most one drag at a time, and reports everything through callbacks, so the game decides what a drop means.
 
-	A press stays pending until the pointer moves `moveThreshold` pixels, then it
-	becomes a drag. On touch, a press inside an overflowing ScrollingFrame scrolls the
-	frame instead, unless it is held still for `touchHoldTime` seconds first. A press
-	that never moves is a tap: an enabled `UIDragDetector` swallows its button's
-	`Activated`, so taps come back through the source's `onTap`. A new press cancels a
-	pending press, or any press from the same source, whose release was never reported.
+	A press stays pending until the pointer moves `moveThreshold` pixels, then it becomes a drag. On touch, a press inside an overflowing ScrollingFrame scrolls the frame instead, unless it is held still for `touchHoldTime` seconds first. A press that never moves is a tap: an enabled `UIDragDetector` swallows its button's `Activated`, so taps come back through the source's `onTap`. A new press cancels a pending press, or any press from the same source, whose release was never reported.
 
 	```lua
 	local drag = DragDrop.new({
