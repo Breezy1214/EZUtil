@@ -12,7 +12,8 @@
 	becomes a drag. On touch, a press inside an overflowing ScrollingFrame scrolls the
 	frame instead, unless it is held still for `touchHoldTime` seconds first. A press
 	that never moves is a tap: an enabled `UIDragDetector` swallows its button's
-	`Activated`, so taps come back through the source's `onTap`.
+	`Activated`, so taps come back through the source's `onTap`. A new press cancels a
+	pending press, or any press from the same source, whose release was never reported.
 
 	```lua
 	local drag = DragDrop.new({
@@ -105,7 +106,7 @@ export type GhostSize = {
 	.touchHoldTime number? -- Seconds a touch press inside a scroll list is held still before it becomes a drag. Defaults to 0.25.
 	.slop number? -- Pixels added around every target's rect when hit-testing. Defaults to 0.
 	.trackCenter boolean? -- Hit-test and place the ghost at the source's centre plus the pointer's movement, instead of at the pointer. Defaults to false.
-	.safeZone GuiObject? -- Releasing inside this GuiObject, away from every target, cancels instead of clearing.
+	.safeZone (GuiObject | () -> GuiObject?)? -- Releasing inside this GuiObject, away from every target, cancels instead of clearing. A function is called on every move, so the zone can be built after the controller.
 	.ghost ((payload: T, sourceId: Id) -> GuiObject)? -- Builds the ghost that follows the drag. No ghost without it.
 	.ghostParent GuiBase2d? -- Where ghosts are parented. Defaults to a ScreenGui the controller creates in PlayerGui.
 	.ghostDisplayOrder number? -- DisplayOrder of the created ScreenGui. Defaults to 100.
@@ -125,7 +126,7 @@ export type Options<T> = {
 	touchHoldTime: number?,
 	slop: number?,
 	trackCenter: boolean?,
-	safeZone: GuiObject?,
+	safeZone: (GuiObject | () -> GuiObject?)?,
 	ghost: ((payload: T, sourceId: Id) -> GuiObject)?,
 	ghostParent: GuiBase2d?,
 	ghostDisplayOrder: number?,
@@ -151,6 +152,7 @@ export type Options<T> = {
 	.onTap (() -> ())? -- A press that never became a drag.
 	.canClear boolean? -- Releasing away from every target calls `onDrop` with no target, instead of cancelling.
 	.targetId Id? -- The target this source sits on. Releasing onto it cancels.
+	.safeZone (GuiObject | () -> GuiObject?)? -- Overrides the controller's `safeZone` for drags from this source.
 ]=]
 export type SourceOptions<T> = {
 	payload: () -> T?,
@@ -158,6 +160,7 @@ export type SourceOptions<T> = {
 	onTap: (() -> ())?,
 	canClear: boolean?,
 	targetId: Id?,
+	safeZone: (GuiObject | () -> GuiObject?)?,
 }
 
 --[=[
@@ -250,6 +253,10 @@ local function containsPoint(gui: GuiObject, point: Vector2, slop: number): bool
 	local min = gui.AbsolutePosition - Vector2.one * slop
 	local max = gui.AbsolutePosition + gui.AbsoluteSize + Vector2.one * slop
 	return point.X >= min.X and point.X <= max.X and point.Y >= min.Y and point.Y <= max.Y
+end
+
+local function resolve(gui: (GuiObject | () -> GuiObject?)?): GuiObject?
+	return if typeof(gui) == "function" then (gui :: () -> GuiObject?)() else gui :: GuiObject?
 end
 
 local function centerOf(gui: GuiObject): Vector2
@@ -360,11 +367,7 @@ function DragDrop.new<T>(options: Options<T>?): DragDrop<T>
 
 	local function sizeGhost(ghost: GuiObject, source: GuiObject): ()
 		local sizing = config.ghostSize
-		local reference: GuiObject? = source
-		if sizing and sizing.reference then
-			local option = sizing.reference
-			reference = if typeof(option) == "function" then (option :: () -> GuiObject?)() else option :: GuiObject
-		end
+		local reference = sizing and resolve(sizing.reference)
 		local size = (reference or source).AbsoluteSize * (if sizing and sizing.scale then sizing.scale else 1)
 		if sizing and size.X > 0 then
 			local width = math.clamp(math.round(size.X), sizing.min or 0, sizing.max or math.huge)
@@ -405,8 +408,8 @@ function DragDrop.new<T>(options: Options<T>?): DragDrop<T>
 		end
 	end
 
-	local function isInSafeZone(point: Vector2): boolean
-		local safeZone = config.safeZone
+	local function isInSafeZone(current: Press<T>, point: Vector2): boolean
+		local safeZone = resolve(current.source.options.safeZone or config.safeZone)
 		return safeZone ~= nil and containsPoint(safeZone, point, 0) and isShown(safeZone)
 	end
 
@@ -418,7 +421,10 @@ function DragDrop.new<T>(options: Options<T>?): DragDrop<T>
 		end
 		local target = targetAt(point, current.payload)
 		setTarget(current, target)
-		setClearing(current, target == nil and current.source.options.canClear == true and not isInSafeZone(point))
+		setClearing(
+			current,
+			target == nil and current.source.options.canClear == true and not isInSafeZone(current, point)
+		)
 		if config.onMove then
 			config.onMove(point)
 		end
@@ -544,8 +550,16 @@ function DragDrop.new<T>(options: Options<T>?): DragDrop<T>
 	end
 
 	local function onStart(record: SourceRecord<T>, pointer: Vector2): ()
-		if press or destroyed then
+		if destroyed then
 			return
+		end
+		local previous = press
+		if previous then
+			-- Its release was never reported, unless it is another source's drag (multi-touch).
+			if previous.source ~= record and previous.mode ~= "Pending" then
+				return
+			end
+			finish(previous, true)
 		end
 		local payload = draggablePayload(record)
 		if payload == nil then
