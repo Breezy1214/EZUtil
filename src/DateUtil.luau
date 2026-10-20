@@ -176,6 +176,57 @@ function DateUtil.formatDuration(seconds: number): string
 end
 
 --[=[
+	Options for [DateUtil.formatClock].
+
+	@interface ClockOptions
+	@within DateUtil
+	.hours ("auto" | "always" | "never")? -- `auto` (the default) adds hours from one hour up; `always` shows `0:01:05`; `never` keeps counting minutes, as in `61:40`.
+	.round ("ceil" | "floor")? -- How fractions of a second are rounded. Defaults to `ceil`, so a countdown shows `0:01` until it reaches zero.
+	.padMinutes boolean? -- Pads the leading minutes to two digits, as in `05:09`. Defaults to false.
+]=]
+export type ClockOptions = {
+	hours: ("auto" | "always" | "never")?,
+	round: ("ceil" | "floor")?,
+	padMinutes: boolean?,
+}
+
+--[=[
+	Formats a number of seconds as a clock: `m:ss`, or `h:mm:ss` from one hour up.
+	Negative values are treated as 0.
+
+	```lua
+	DateUtil.formatClock(65) -- "1:05"
+	DateUtil.formatClock(64.2) -- "1:05"
+	DateUtil.formatClock(3725) -- "1:02:05"
+	DateUtil.formatClock(65, { hours = "always" }) -- "0:01:05"
+	DateUtil.formatClock(3725, { hours = "never" }) -- "62:05"
+	DateUtil.formatClock(64.2, { round = "floor", padMinutes = true }) -- "01:04"
+	```
+
+	@within DateUtil
+	@param seconds number
+	@param options ClockOptions?
+	@return string
+]=]
+function DateUtil.formatClock(seconds: number, options: ClockOptions?): string
+	assert(typeof(seconds) == "number", "Seconds must be a number")
+
+	local hoursMode = options and options.hours or "auto"
+	local rounded = if options and options.round == "floor" then math.floor(seconds) else math.ceil(seconds)
+	local total = math.max(0, rounded)
+	local secondsPart = total % secondsInMinute
+
+	if hoursMode == "always" or (hoursMode == "auto" and total >= secondsInHour) then
+		local hours = total // secondsInHour
+		local minutes = (total % secondsInHour) // secondsInMinute
+		return string.format("%d:%02d:%02d", hours, minutes, secondsPart)
+	end
+
+	local minutes = total // secondsInMinute
+	return string.format(if options and options.padMinutes then "%02d:%02d" else "%d:%02d", minutes, secondsPart)
+end
+
+--[=[
 	Returns the number of seconds between `timestamp` and `endTimestamp`.
 
 	@within DateUtil

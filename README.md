@@ -2,7 +2,7 @@
 
 [Documentation](https://breezy1214.github.io/EZUtil/)
 
-EZUtil is a collection of small, game-agnostic Roblox utilities: tables, math, dates, instances, players, UI layout, projectiles, particles and VFX. It has no game config, Knit services or hardcoded game paths, so you can drop it into any project.
+EZUtil is a collection of small, game-agnostic Roblox utilities: tables, math, dates, colors, instances, players, UI layout and drag and drop, sounds, highlights, projectiles, particles and VFX. It has no game config, Knit services or hardcoded game paths, so you can drop it into any project.
 
 ## Installation
 
@@ -22,6 +22,7 @@ local EZUtil = require(ReplicatedStorage.Packages.EZUtil)
 
 print(EZUtil.MathUtil.shortenNumber(1200)) -- 1.2K
 print(EZUtil.DateUtil.formatDuration(3725)) -- 1h 2m 5s
+print(EZUtil.DateUtil.formatClock(65)) -- 1:05
 
 -- Or require a single module directly
 local TableUtil = require(ReplicatedStorage.Packages.EZUtil.TableUtil)
@@ -53,6 +54,22 @@ Helpers for character rigs, humanoids and skinned meshes.
 - `findSkinnedMesh(character)`: the MeshPart whose Bones pose a skinned character, or nil for a jointed rig.
 - `collectCharacterBones(character)`: every Bone under the character, parents before children.
 
+### ColorUtil
+
+Converts Color3 values to and from `{ R, G, B }` tables of 0-255 integers, safe to save or send over remotes.
+
+- `serialize(color)`: a new `{ R, G, B }` table from a Color3 or a serialized color.
+- `deserialize(value, fallback?)`: a Color3, or `fallback` when `value` is not a valid serialized color.
+- `isSerialized(value)`, `toColor3(value)`: validation and conversion.
+- `equals(left, right)`: compares any mix of Color3 and serialized colors by their 8-bit channels.
+- `findInPalette(value, palette)`: the index of the first matching palette color.
+- `toKey(color)`, `fromKey(key)`: a `"R,G,B"` dictionary key and back.
+
+```lua
+local saved = ColorUtil.serialize(Color3.fromRGB(217, 169, 135)) -- { R = 217, G = 169, B = 135 }
+local color = ColorUtil.deserialize(profile.Data.Color, Color3.new(1, 1, 1))
+```
+
 ### DateUtil
 
 Timestamps, periods and human-readable durations.
@@ -63,11 +80,52 @@ Timestamps, periods and human-readable durations.
 - `getPeriod(timestamp, duration, offset?)`: the index of the fixed-length period containing `timestamp`.
 - `getPeriodEnd(period, duration, offset?)`: the timestamp at which a period ends.
 - `formatDuration(seconds)`: formats seconds as `1h 2m 5s`.
+- `formatClock(seconds, options?)`: formats seconds as `m:ss`, or `h:mm:ss` from an hour up. Options: `hours` (`"auto"`, `"always"` or `"never"`), `round` (`"ceil"` by default, or `"floor"`) and `padMinutes`.
 - `timeAgoUnix(timestamp, endTimestamp?)`: seconds elapsed since `timestamp`.
 - `formatUnix(timestamp, format, locale?)`: formats a timestamp with a DateTime format string.
 - `unixToClockFormat(timestamp, format?, locale?)`: formats a timestamp as `mm:ss` by default.
 - `timeAgo(timestamp, endTimestamp?)`: a readable "time ago" string, such as `1 minute 20 seconds ago`.
 - `totalTime(timestamp, endTimestamp?, separator?, depth?)`: a readable total duration with an optional unit limit.
+
+### DragDrop
+
+A client-side UI drag-and-drop controller. Each controller owns its sources and drop targets, runs one drag at a time, and reports everything through callbacks.
+
+- `new(options?)`: creates a controller. Options cover the move threshold (8 px), touch hold time (0.25 s), target slop, a ghost factory with its parent, DisplayOrder and sizing, the snap-back time, a safe zone, click and hover sounds, and the `onDragStart`, `onMove`, `onTargetChanged`, `onClearing`, `onDrop` and `onCancel` callbacks.
+- `controller:addSource(id, gui, options)`: adds a `UIDragDetector` to `gui`. Options: `payload` (a getter), `enabled`, `onTap`, `canClear` and `targetId`. Returns a handle with `refresh` and `Destroy`.
+- `controller:addTarget(id, gui, options?)`: registers a drop target with an optional `accept(payload, targetId)` predicate and slop. Returns a remove function.
+- `controller:removeTarget(id)`, `controller:refresh()`, `controller:cancel()`, `controller:isDragging()`, `controller:getActive()`, `controller:Destroy()`.
+
+A press turns into a drag after it moves past the threshold. On touch, a press inside an overflowing ScrollingFrame scrolls it instead, unless it is held still first. A press that never moves calls `onTap`, because the detector swallows the button's `Activated`. A cancelled drag tweens its ghost back to the source.
+
+```lua
+local drag = DragDrop.new({
+	ghost = function(itemId: string): GuiObject
+		return makeIcon(itemId)
+	end,
+	onDrop = function(itemId: string, _fromSlot, toSlot)
+		if toSlot then
+			equip(itemId, toSlot)
+		else
+			unequip(itemId)
+		end
+	end,
+})
+
+for index, slot in slotFrames do
+	drag:addTarget(index, slot)
+	drag:addSource(index, slot, {
+		payload = function()
+			return hotbar[index]
+		end,
+		targetId = index,
+		canClear = true,
+		onTap = function()
+			select(index)
+		end,
+	})
+end
+```
 
 ### FixedRewardSequence
 
@@ -77,6 +135,24 @@ Timestamps, periods and human-readable durations.
 
 - `projectDown(position, depth, raycastParams, resultOffset?)`: raycasts straight down and returns the hit position plus an optional offset.
 - `raycast(origin, direction, filterList?, filterType?, collisionGroup?)`: a one-call raycast that builds its RaycastParams for you.
+- `isPointInPart(part, point)`: whether a point is inside a part's rotated box.
+- `getSnappedCFrame(model, pivot, raycastParams?, depth?)`: `pivot` lowered so the model rests on the floor below it. The raycast excludes the model by default.
+- `snapToFloorPivot(model, pivot, raycastParams?, depth?)`: pivots the model onto that floor and returns the CFrame.
+
+### HighlightUtil
+
+- `new(options?)`: creates a highlighter with its own cache. Options: `ignore(object)` to skip objects such as a baseplate, and `parent`.
+- `highlighter:add(object, config?)`, `highlighter:addPulse(object, config?)`: adds one Highlight per model or part. A pulse animates the fill transparency.
+- `highlighter:remove(object)`, `highlighter:addBulk(objects, config?)`, `highlighter:removeBulk(objects)`, `highlighter:get(object)`, `highlighter:clear()`, `highlighter:Destroy()`.
+
+```lua
+local highlighter = HighlightUtil.new({
+	ignore = function(object)
+		return object.Name == "Baseplate"
+	end,
+})
+highlighter:addPulse(door, { fillColor = Color3.fromRGB(0, 170, 255) })
+```
 
 ### InstanceUtil
 
@@ -97,6 +173,7 @@ Timestamps, periods and human-readable durations.
 Keeps ScrollingFrame canvases and items sized correctly.
 
 - `resolveUDim(size, referenceSize)`: converts a UDim to pixels against a reference size.
+- `getInheritedScale(instance)`: the product of every UIScale on the instance and its ancestors, up to its LayerCollector.
 - `FixScrollingCanvas(layout, scrollingFrame, padding?)`: keeps CanvasSize fitted to the layout's content and padding. Returns a cleanup function.
 - `FixAuthoredListHeights(scrollingFrame, layout, items)`: locks list items and padding to their authored heights relative to the viewport. Returns a cleanup function.
 - `FixLayout(layout, scrollingFrame, itemAspectRatio?, padding?)`: applies aspect-ratio constraints to items and keeps the vertical canvas fitted. Returns a cleanup function.
@@ -160,6 +237,28 @@ Ballistic projectiles and aim previews.
 - `getAncestor(child, nameOrPredicate)`: the first ancestor, or the instance itself, that matches.
 - `find(node, keyOrPredicate, maxDepth?)`: a breadth-limited search through Instance children or nested tables.
 - `exists(node, names)`: whether every named child or key exists.
+
+### SoundUtil
+
+Plays named sounds with priorities, fades and cross-fades, with the sound lookup and volume settings supplied by the game.
+
+- `new(options)`: creates a sound player. `sounds` is a root whose descendant Sounds are found by name, or a lookup function. `volume(category)` returns the volume for a SoundGroup name. `duckFactor` (0.1) applies to sounds below the highest playing priority.
+- `player:play(nameOrConfig)`, `player:playAt(nameOrConfig, position)`: play a sound, or a clone from a point in the world. Both return a Promise that resolves with the Sound when it finishes.
+- `player:stop(sound, preserve?)`, `player:pauseSound(sound)`, `player:resumeSound(sound)`.
+- `player:fade(sound, targetVolume, duration)`, `player:crossFade(fadeOut, fadeIn, duration)`: Promise-based volume fades.
+- `player:getSoundInstance(name)`, `player:refreshVolumes()`, `player:Destroy()`.
+
+```lua
+local sounds = SoundUtil.new({
+	sounds = SoundService,
+	volume = function(category)
+		return if category == "Music" and not settings.Music then 0 else 1
+	end,
+})
+
+sounds:play({ name = "BossMusic", looped = true, priority = 1 })
+sounds:crossFade("BossMusic", "MainMusic", 2)
+```
 
 ### SystemUtil
 

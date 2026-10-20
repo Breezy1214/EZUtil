@@ -34,6 +34,34 @@ end
 
 local resolveUDim = LayoutUtil.resolveUDim
 
+--[=[
+	Returns the combined scale that every UIScale applies to `instance`: the product
+	of the `Scale` of each UIScale on the instance and its ancestors, up to the
+	nearest LayerCollector. Divide pixel sizes by it to get offsets that render at
+	that pixel size inside the instance.
+
+	```lua
+	local scale = LayoutUtil.getInheritedScale(frame)
+	ghost.Size = UDim2.fromOffset(64 / scale, 64 / scale)
+	```
+
+	@within LayoutUtil
+	@param instance Instance
+	@return number -- 1 when no UIScale applies.
+]=]
+function LayoutUtil.getInheritedScale(instance: Instance): number
+	local scale = 1
+	local node: Instance? = instance
+	while node and not node:IsA("LayerCollector") do
+		local uiScale = node:FindFirstChildOfClass("UIScale")
+		if uiScale then
+			scale *= uiScale.Scale
+		end
+		node = node.Parent
+	end
+	return scale
+end
+
 local function paddedSize(contentSize: number, leading: UDim?, trailing: UDim?): number
 	if not leading and not trailing then
 		return contentSize

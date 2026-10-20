@@ -27,18 +27,22 @@
 
 	- [AimIndicator]: a neon disc that marks where an ability will land.
 	- [CharacterRigUtil]: humanoids, animators, body parts and skinned mesh rigs.
-	- [DateUtil]: timestamps, periods and human-readable durations.
+	- [ColorUtil]: Color3 serialization, comparison and keys.
+	- [DateUtil]: timestamps, periods, clocks and human-readable durations.
+	- [DragDrop]: UI drag and drop with tap, scroll and snap-back handling.
 	- [FixedRewardSequence]: deterministic, evenly spread reward sequences.
-	- [GroundUtil]: downward ground projection and one-call raycasts.
+	- [GroundUtil]: ground projection, floor snapping, point-in-part tests and raycasts.
+	- [HighlightUtil]: cached and pulsing Highlights.
 	- [InstanceUtil]: tag lookups, welds and look-at tweens.
 	- [JanitorUtil]: safe Janitor destruction.
-	- [LayoutUtil]: ScrollingFrame canvas and item sizing.
+	- [LayoutUtil]: ScrollingFrame canvas and item sizing, and inherited UIScale.
 	- [MathUtil]: rounding, formatting, random values and positions.
 	- [ParticleUtil]: particle templates, bursts and cleanup.
 	- [PlayerUtil]: humanoids, animations, group ranks and player UI.
 	- [ProfileUtil]: named MicroProfiler scopes.
 	- [ProjectileUtil]: ballistic projectiles and aim preview beams.
 	- [SearchUtil]: searching Instance trees and nested tables.
+	- [SoundUtil]: named sounds with priorities, fades and cross-fades.
 	- [SystemUtil]: timers, connections, product info and platform checks.
 	- [TableDiffUtil]: shallow table comparison.
 	- [TableUtil]: table and string helpers.
@@ -48,9 +52,12 @@
 export type EZUtil = {
 	AimIndicator: typeof(require(script.AimIndicator)),
 	CharacterRigUtil: typeof(require(script.CharacterRigUtil)),
+	ColorUtil: typeof(require(script.ColorUtil)),
 	DateUtil: typeof(require(script.DateUtil)),
+	DragDrop: typeof(require(script.DragDrop)),
 	FixedRewardSequence: typeof(require(script.FixedRewardSequence)),
 	GroundUtil: typeof(require(script.GroundUtil)),
+	HighlightUtil: typeof(require(script.HighlightUtil)),
 	InstanceUtil: typeof(require(script.InstanceUtil)),
 	JanitorUtil: typeof(require(script.JanitorUtil)),
 	LayoutUtil: typeof(require(script.LayoutUtil)),
@@ -60,6 +67,7 @@ export type EZUtil = {
 	ProfileUtil: typeof(require(script.ProfileUtil)),
 	ProjectileUtil: typeof(require(script.ProjectileUtil)),
 	SearchUtil: typeof(require(script.SearchUtil)),
+	SoundUtil: typeof(require(script.SoundUtil)),
 	SystemUtil: typeof(require(script.SystemUtil)),
 	TableDiffUtil: typeof(require(script.TableDiffUtil)),
 	TableUtil: typeof(require(script.TableUtil)),
