@@ -240,10 +240,10 @@ Ballistic projectiles and aim previews.
 
 ### SoundUtil
 
-Plays named sounds with priorities, fades and cross-fades, with the sound lookup and volume settings supplied by the game.
+Plays sounds with priorities, fades and cross-fades. It never changes a Sound it did not create: a sound played in place gets its overridden properties back when it finishes.
 
-- `new(options)`: creates a sound player. `sounds` is a root whose descendant Sounds are found by name, or a lookup function. `volume(category)` returns the volume for a SoundGroup name. `duckFactor` (0.1) applies to sounds below the highest playing priority.
-- `player:play(nameOrConfig)`, `player:playAt(nameOrConfig, position)`: play a sound, or a clone from a point in the world. Both return a Promise that resolves with the Sound when it finishes.
+- `new(options?)`: creates a sound player. Every option is optional. `sounds` is a root whose descendant Sounds are found by name, or a lookup function. `volume(sound)` returns a volume multiplier for a playing sound. `duckFactor` (0.1) applies to sounds below the highest playing priority. `playAtParent` (`workspace.Terrain`) holds `playAt` emitters.
+- `player:play(sound)`, `player:playAt(sound, position)`: play a Sound, a name, or a config, in place or as a clone from a point in the world. Both return a Promise that resolves with the Sound when it finishes.
 - `player:stop(sound, preserve?)`, `player:pauseSound(sound)`, `player:resumeSound(sound)`.
 - `player:fade(sound, targetVolume, duration)`, `player:crossFade(fadeOut, fadeIn, duration)`: Promise-based volume fades.
 - `player:getSoundInstance(name)`, `player:refreshVolumes()`, `player:Destroy()`.
@@ -251,11 +251,12 @@ Plays named sounds with priorities, fades and cross-fades, with the sound lookup
 ```lua
 local sounds = SoundUtil.new({
 	sounds = SoundService,
-	volume = function(category)
-		return if category == "Music" and not settings.Music then 0 else 1
+	volume = function(sound)
+		return if sound.SoundGroup == musicGroup and not settings.Music then 0 else 1
 	end,
 })
 
+sounds:play(script.Hit)
 sounds:play({ name = "BossMusic", looped = true, priority = 1 })
 sounds:crossFade("BossMusic", "MainMusic", 2)
 ```

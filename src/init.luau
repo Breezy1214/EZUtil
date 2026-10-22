@@ -42,7 +42,7 @@
 	- [ProfileUtil]: named MicroProfiler scopes.
 	- [ProjectileUtil]: ballistic projectiles and aim preview beams.
 	- [SearchUtil]: searching Instance trees and nested tables.
-	- [SoundUtil]: named sounds with priorities, fades and cross-fades.
+	- [SoundUtil]: sounds with priorities, fades and cross-fades.
 	- [SystemUtil]: timers, connections, product info and platform checks.
 	- [TableDiffUtil]: shallow table comparison.
 	- [TableUtil]: table and string helpers.
