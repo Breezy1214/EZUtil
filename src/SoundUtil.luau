@@ -205,7 +205,7 @@ function SoundUtil.new(options: Options): SoundPlayer
 		end
 	end
 
-	local function finish(playback: Playback): ()
+	local function finish(playback: Playback, destroying: boolean?): ()
 		local sound = playback.sound
 		if playing[sound] ~= playback then
 			return
@@ -219,10 +219,12 @@ function SoundUtil.new(options: Options): SoundPlayer
 		if lifeTimeThread and lifeTimeThread ~= coroutine.running() then
 			task.cancel(lifeTimeThread)
 		end
-		if playback.cloned then
-			sound:Destroy()
-		else
-			sound.Volume = baseOf(sound)
+		if not destroying then
+			if playback.cloned then
+				sound:Destroy()
+			else
+				sound.Volume = baseOf(sound)
+			end
 		end
 		applyVolumes()
 		for _, callback in playback.onFinished do
@@ -284,7 +286,7 @@ function SoundUtil.new(options: Options): SoundPlayer
 		table.insert(
 			playback.connections,
 			sound.Destroying:Connect(function()
-				finish(playback)
+				finish(playback, true)
 			end)
 		)
 		if sound.Looped and config.lifeTime then
