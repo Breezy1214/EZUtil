@@ -333,9 +333,7 @@ function SoundUtil.new(options: Options?): SoundPlayer
 		end
 
 		local function onEnded(): ()
-			if not sound.IsPlaying then
-				finish(playback)
-			end
+			task.defer(finish, playback)
 		end
 		table.insert(playback.connections, sound.Ended:Connect(onEnded))
 		table.insert(playback.connections, sound.Stopped:Connect(onEnded))
