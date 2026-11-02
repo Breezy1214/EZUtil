@@ -75,12 +75,14 @@ export type SoundConfig = {
 	.volume ((sound: Sound) -> number)? -- The volume multiplier for a playing sound. Defaults to 1.
 	.duckFactor number? -- The volume multiplier for sounds below the highest playing priority. Defaults to 0.1; 1 turns ducking off.
 	.playAtParent BasePart? -- Where `playAt` creates its emitter attachment. Defaults to `workspace.Terrain`.
+	.endGrace number? -- Seconds a clone waits after it ends before it finishes, so a server-played sound isn't cut off on clients still playing it. Defaults to 0.
 ]=]
 export type Options = {
 	sounds: (Instance | (name: string) -> Sound?)?,
 	volume: ((sound: Sound) -> number)?,
 	duckFactor: number?,
 	playAtParent: BasePart?,
+	endGrace: number?,
 }
 
 export type Playable = string | Sound | SoundConfig
@@ -144,6 +146,7 @@ function SoundUtil.new(options: Options?): SoundPlayer
 	local settings: Options = options or {}
 	local volumeProvider = settings.volume
 	local duckFactor = settings.duckFactor or DEFAULT_DUCK_FACTOR
+	local endGrace = settings.endGrace or 0
 	local janitor = Janitor.new()
 	local playing: { [Sound]: Playback } = {}
 	local priorityCounts: { [number]: number } = {}
@@ -332,11 +335,18 @@ function SoundUtil.new(options: Options?): SoundPlayer
 			sound.Parent = config.instance
 		end
 
-		local function onEnded(): ()
-			task.defer(finish, playback)
-		end
-		table.insert(playback.connections, sound.Ended:Connect(onEnded))
-		table.insert(playback.connections, sound.Stopped:Connect(onEnded))
+		table.insert(
+			playback.connections,
+			sound.Ended:Connect(function()
+				task.delay(if cloned then endGrace else 0, finish, playback)
+			end)
+		)
+		table.insert(
+			playback.connections,
+			sound.Stopped:Connect(function()
+				task.defer(finish, playback)
+			end)
+		)
 		table.insert(
 			playback.connections,
 			sound.Destroying:Connect(function()
